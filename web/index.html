@@ -82,6 +82,14 @@
   .empty{color:var(--muted); padding:40px 0}
   #speed{margin-left:auto; font-size:12px; color:var(--muted)}
   #speed select{background:var(--panel2); color:var(--text); border:1px solid var(--border); border-radius:6px; padding:3px 6px}
+  /* layer switch (词→短语→句子) */
+  .layer-switch{display:flex; align-items:center; gap:6px; flex-wrap:wrap; margin:10px 0 4px}
+  .layer-lab{font-size:12px; color:var(--muted)}
+  .layer-btn{background:var(--panel); border:1px solid var(--border); color:var(--text);
+    padding:6px 13px; border-radius:8px; cursor:pointer; font-size:13px}
+  .layer-btn.active{background:var(--jp); color:#1a1205; border-color:var(--jp); font-weight:600}
+  .layer-btn .lc{margin-left:6px; font-size:11px; opacity:.7}
+  .layer-switch .arrow{color:var(--muted); font-size:12px}
   /* mode switch */
   .mode-switch{display:flex; gap:8px; margin:6px 0 16px}
   .mode-btn{background:var(--panel); border:1px solid var(--border); color:var(--muted);
@@ -204,7 +212,7 @@
   // ---------- App ----------
   const DATA = window.STUDY_DATA || {days:[], generated:"?"};
   const player = document.getElementById('player');
-  let cur = 0, curTab = 0, playRate = 0.9, sentMode = 'browse', thinkSec = 4;
+  let cur = 0, curTab = 0, playRate = 0.9, sentMode = 'browse', thinkSec = 4, curLayer = 0;
 
   document.getElementById('gen').textContent = "数据更新于 "+DATA.generated;
 
@@ -233,8 +241,17 @@
     let body = d.logs.length ? renderMd(d.logs[curTab].md) : '<div class="empty">这天没有日志正文</div>';
 
     let sents = '';
+    const layers = layersOf(d);
     if(d.sentences.length){
-      sents = '<div id="sent-wrap"><h2>🔊 例句跟读</h2>'+
+      if(curLayer >= layers.length) curLayer = 0;
+      let layerSwitch = '';
+      if(layers.length>1){
+        layerSwitch = '<div class="layer-switch"><span class="layer-lab">递进：</span>'+
+          layers.map((ly,i)=>'<button class="layer-btn'+(i===curLayer?' active':'')+'" data-l="'+i+'">'+
+            (i+1)+'. '+ly.name+'<span class="lc">'+ly.items.length+'</span></button>').join('<span class="arrow">→</span>')+
+          '</div>';
+      }
+      sents = '<div id="sent-wrap"><h2>🔊 例句跟读</h2>'+layerSwitch+
         '<div class="mode-switch">'+
         '<button class="mode-btn'+(sentMode==='browse'?' active':'')+'" id="m-browse">📖 浏览</button>'+
         '<button class="mode-btn'+(sentMode==='drill'?' active':'')+'" id="m-drill">🎯 练习（练本能）</button>'+
@@ -244,11 +261,25 @@
     m.innerHTML = (tabs?'<div id="tabs">'+tabs+'</div>':'') + '<div class="md">'+body+'</div>' + sents;
     m.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{curTab=+t.dataset.t; renderMain();});
     if(d.sentences.length){
+      m.querySelectorAll('.layer-btn').forEach(b=>b.onclick=()=>{stopTimer(); curLayer=+b.dataset.l; renderMain();});
       document.getElementById('m-browse').onclick=()=>{stopTimer(); sentMode='browse'; renderMain();};
       document.getElementById('m-drill').onclick=()=>{sentMode='drill'; renderMain();};
-      if(sentMode==='browse') renderBrowse(d.sentences); else startDrill(d.sentences);
+      const items = layers.length ? layers[curLayer].items : d.sentences;
+      if(sentMode==='browse') renderBrowse(items); else startDrill(items);
     }
     m.scrollTop=0;
+  }
+
+  // 把一天的 sentences 按 layer 分组（保持出现顺序）；无 layer 则返回单组
+  function layersOf(d){
+    const order=[], map={};
+    (d.sentences||[]).forEach(s=>{
+      const k=s.layer||'';
+      if(!(k in map)){map[k]=[]; order.push(k);}
+      map[k].push(s);
+    });
+    if(order.length<=1 && (order[0]||'')==='') return [];   // 没有分层信息
+    return order.map(k=>({name:k||'例句', items:map[k]}));
   }
 
   // ---------- 浏览模式 ----------

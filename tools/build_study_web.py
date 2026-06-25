@@ -22,7 +22,8 @@ RATE = "-10%"
 
 DATE_RE = re.compile(r"(\d{4}-\d{2}-\d{2})-(.+)\.md$")
 SENT_RE = re.compile(r"^\s*(\d+)\.\s+(.*\S)\s*$")
-H2_RE = re.compile(r"^##\s+(.*\S)\s*$")
+H2_RE = re.compile(r"^##\s+(.*\S)\s*$")     # 层（单词/短语/句子）
+H3_RE = re.compile(r"^###\s+(.*\S)\s*$")    # 层内分类
 
 # ---------- 内置「基础卡」：数字/月份/日期/星期（侧栏独立条目，可浏览+练习）----------
 # 每项 (prompt 提示, reading 读法, written 书写形可空)；prompt 不暴露读法，逼提取
@@ -53,7 +54,7 @@ def build_basic_days():
     for deck in BASIC_DECKS:
         sents = []
         for i,(prompt, reading, written) in enumerate(deck["items"], 1):
-            sents.append({"n": i, "cat": deck["label"], "jp": reading, "kana": written, "cn": prompt})
+            sents.append({"n": i, "layer": "", "cat": deck["label"], "jp": reading, "kana": written, "cn": prompt})
         days.append({
             "date": deck["label"], "slug": deck["slug"], "kind": "basic",
             "logs": [{"title": deck["label"], "md": "# "+deck["label"]+"\n\n"+deck["intro"]}],
@@ -63,29 +64,37 @@ def build_basic_days():
 
 
 def parse_sentences(path):
-    """从'跟读例句'文件解析： N. 日文 / 假名 / 中文（注）"""
+    """从'跟读例句'文件解析： N. 日文 / 假名 / 中文（注）。
+    ## = 层（单词/短语/句子）；### = 层内分类。n 全天连续编号（音频文件名用）。"""
     out = []
-    cat = ""
+    layer, cat = "", ""
+    n = 0
+    in_fence = False
     with open(path, encoding="utf-8") as f:
         for line in f:
+            if line.lstrip().startswith("```"):
+                in_fence = not in_fence
+                continue
+            if in_fence:
+                continue
             mh = H2_RE.match(line)
             if mh:
-                cat = mh.group(1)
+                layer = re.sub(r"^第?\s*[一二三四五0-9]*\s*层?\s*[·.\s]*", "", mh.group(1)).strip() or mh.group(1)
+                cat = ""
+                continue
+            m3 = H3_RE.match(line)
+            if m3:
+                cat = m3.group(1)
                 continue
             m = SENT_RE.match(line)
             if not m:
                 continue
-            n = int(m.group(1))
-            # 分隔符是 "/"（两侧空格不定），稳妥地按 斜杠 切，最多切 3 段
             parts = [p.strip() for p in re.split(r"\s*/\s*", m.group(2))]
-            jp = parts[0] if len(parts) > 0 else ""
-            kana = parts[1] if len(parts) > 1 else ""
-            cn = " / ".join(parts[2:]) if len(parts) > 2 else ""
-            cn = re.sub(r"\*\*", "", cn)  # 去掉中文里的 markdown 粗体符号
-            kana = re.sub(r"\*\*", "", kana)
-            # 去掉日文里可能残留的 markdown 粗体
-            jp_clean = re.sub(r"\*\*", "", jp)
-            out.append({"n": n, "cat": cat, "jp": jp_clean, "kana": kana, "cn": cn})
+            jp = re.sub(r"\*\*", "", parts[0]) if len(parts) > 0 else ""
+            kana = re.sub(r"\*\*", "", parts[1]) if len(parts) > 1 else ""
+            cn = re.sub(r"\*\*", "", " / ".join(parts[2:])) if len(parts) > 2 else ""
+            n += 1
+            out.append({"n": n, "layer": layer, "cat": cat, "jp": jp, "kana": kana, "cn": cn})
     return out
 
 

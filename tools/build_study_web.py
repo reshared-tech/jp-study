@@ -14,6 +14,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LOG_DIR = os.path.join(ROOT, "日志")
 AUDIO_DIR = os.path.join(ROOT, "音频", "句子")
 WEB_DIR = os.path.join(ROOT, "web")
+VOCAB_FILE = os.path.join(ROOT, "大纲", "词汇.md")
+VOCAB_LEVELS = ["N5", "N4"]   # 点火期只做地基两级，可后续加 N3
 os.makedirs(AUDIO_DIR, exist_ok=True)
 os.makedirs(WEB_DIR, exist_ok=True)
 
@@ -60,6 +62,56 @@ def build_basic_days():
             "logs": [{"title": deck["label"], "md": "# "+deck["label"]+"\n\n"+deck["intro"]}],
             "sentences": sents,
         })
+    return days
+
+
+# ---------- 词汇卡：解析 大纲/词汇.md 的分级词表（N5/N4 补地基）----------
+def build_vocab_days():
+    if not os.path.exists(VOCAB_FILE):
+        return []
+    days, level, cat, rows = [], None, None, []
+    deck_idx = 0
+
+    def flush():
+        nonlocal rows, deck_idx
+        if level in VOCAB_LEVELS and cat and rows:
+            deck_idx += 1
+            sents = []
+            for i, (jp, kana, cn, ex) in enumerate(rows, 1):
+                sents.append({"n": i, "layer": "", "cat": f"{level}·{cat}",
+                              "jp": jp or kana, "kana": kana, "cn": cn, "ex": ex, "noaudio": True})
+            days.append({
+                "date": f"{level}·{cat}", "slug": f"v{deck_idx}", "kind": "vocab", "level": level,
+                "logs": [{"title": f"{level} 词汇·{cat}",
+                          "md": f"# {level} 词汇·{cat}\n\n看中文→出声说日语单词→揭晓（词+假名+例句）。共 {len(rows)} 词。"}],
+                "sentences": sents,
+            })
+        rows = []
+
+    with open(VOCAB_FILE, encoding="utf-8") as f:
+        for line in f:
+            mh = H2_RE.match(line)
+            if mh:
+                flush()
+                m = re.match(r"(N[1-5])", mh.group(1))
+                level = m.group(1) if m else None
+                cat = None
+                continue
+            m3 = H3_RE.match(line)
+            if m3:
+                flush()
+                cat = m3.group(1)
+                continue
+            if line.lstrip().startswith("|"):
+                cells = [c.strip() for c in line.strip().strip("|").split("|")]
+                if len(cells) < 3:
+                    continue
+                if cells[0] in ("日汉字", "日漢字") or set(cells[0]) <= set("-: "):
+                    continue   # 跳过表头/分隔行
+                jp, kana, cn = cells[0], cells[1], cells[2]
+                ex = cells[3] if len(cells) > 3 else ""
+                rows.append((jp, kana, cn, ex))
+    flush()
     return days
 
 
@@ -118,7 +170,7 @@ def collect():
     dated = [days[k] for k in sorted(days.keys(), reverse=True)]
     for d in dated:
         d.setdefault("kind", "log")
-    return dated + build_basic_days()
+    return dated + build_basic_days() + build_vocab_days()
 
 
 async def synth(text, path):
@@ -130,6 +182,9 @@ async def gen_audio(days):
     for d in days:
         slug = d.get("slug", d["date"])
         for s in d["sentences"]:
+            if s.get("noaudio"):   # 词汇卡暂不生成音频（量大），网页会优雅处理无音频
+                s["audio"] = ""
+                continue
             fname = f"{slug}-s{s['n']:02d}.mp3"
             fpath = os.path.join(AUDIO_DIR, fname)
             rel = os.path.join("..", "音频", "句子", fname)

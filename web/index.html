@@ -32,6 +32,7 @@
   .day-btn.active{background:var(--panel2); border-color:var(--accent); color:var(--accent)}
   .day-btn .cnt{float:right; color:var(--muted); font-size:11px}
   .side-sec{font-size:11px; color:var(--muted); margin:16px 0 6px; padding-left:4px; letter-spacing:.5px}
+  .side-sub{font-size:11px; color:var(--accent2); margin:8px 0 3px; padding-left:8px; font-weight:600}
   /* main */
   #main{flex:1; overflow-y:auto; padding:28px 40px 80px; max-width:920px}
   #tabs{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px}
@@ -79,6 +80,9 @@
   .sent .jp{font-size:17px; color:var(--jp); margin-bottom:2px}
   .sent .kana{font-size:12px; color:var(--muted)}
   .sent .cn{font-size:13px; color:#cdd9e5; margin-top:2px}
+  .sent .ex{font-size:12px; color:var(--muted); margin-top:4px}
+  .play-btn.ph{background:transparent; color:var(--border); cursor:default; display:flex; align-items:center; justify-content:center}
+  .reveal .ex-big{font-size:14px; color:var(--muted); margin-top:8px; max-width:480px}
   .empty{color:var(--muted); padding:40px 0}
   #speed{margin-left:auto; font-size:12px; color:var(--muted)}
   #speed select{background:var(--panel2); color:var(--text); border:1px solid var(--border); border-radius:6px; padding:3px 6px}
@@ -222,12 +226,22 @@
     const btn = (d,idx,unit)=>'<div class="day"><button class="day-btn'+(idx===cur?' active':'')+'" data-i="'+idx+'">'+
         d.date+'<span class="cnt">'+(d.sentences.length?d.sentences.length+unit:'')+'</span></button></div>';
     let html='';
-    const logs = DATA.days.map((d,i)=>({d,i})).filter(x=>x.d.kind!=='basic');
-    const basics = DATA.days.map((d,i)=>({d,i})).filter(x=>x.d.kind==='basic');
+    const idx = DATA.days.map((d,i)=>({d,i}));
+    const logs = idx.filter(x=>x.d.kind!=='basic' && x.d.kind!=='vocab');
+    const basics = idx.filter(x=>x.d.kind==='basic');
+    const vocab = idx.filter(x=>x.d.kind==='vocab');
     html += logs.map(x=>btn(x.d,x.i,'句')).join('');
     if(basics.length){
       html += '<div class="side-sec">🧱 基础卡</div>';
       html += basics.map(x=>btn(x.d,x.i,'项')).join('');
+    }
+    if(vocab.length){
+      html += '<div class="side-sec">📚 词汇（N5/N4 补地基）</div>';
+      let lastLv=null;
+      vocab.forEach(x=>{
+        if(x.d.level!==lastLv){html+='<div class="side-sub">'+x.d.level+'</div>'; lastLv=x.d.level;}
+        html += btn(x.d, x.i, '词');
+      });
     }
     dl.innerHTML = html;
     dl.querySelectorAll('.day-btn').forEach(b=>b.onclick=()=>{stopTimer(); cur=+b.dataset.i; curTab=0; sentMode='browse'; renderSidebar(); renderMain();});
@@ -287,11 +301,13 @@
     let lastCat=null, rows='';
     sentences.forEach(s=>{
       if(s.cat!==lastCat){rows += '<div class="sgroup-title">'+(s.cat||'例句')+'</div>'; lastCat=s.cat;}
-      rows += '<div class="sent" data-audio="'+encodeURI(s.audio)+'">'+
-        '<button class="play-btn">▶</button>'+
+      const hasAudio = !!s.audio;
+      rows += '<div class="sent'+(hasAudio?'':' noaudio')+'"'+(hasAudio?' data-audio="'+encodeURI(s.audio)+'"':'')+'>'+
+        (hasAudio?'<button class="play-btn">▶</button>':'<span class="play-btn ph">·</span>')+
         '<div class="txt"><div class="jp">'+s.jp+'</div>'+
         (s.kana?'<div class="kana">'+s.kana+'</div>':'')+
-        (s.cn?'<div class="cn">'+s.cn+'</div>':'')+'</div></div>';
+        (s.cn?'<div class="cn">'+s.cn+'</div>':'')+
+        (s.ex?'<div class="ex">'+s.ex+'</div>':'')+'</div></div>';
     });
     const html = '<div class="hint">点任意一句即可播放（一句一个音频），再点重播。'+
       '<span id="speed" style="margin-left:14px">语速 '+
@@ -300,7 +316,7 @@
     const body = document.getElementById('sent-body'); body.innerHTML = html;
     const rateSel = document.getElementById('rate');
     rateSel.value=String(playRate); rateSel.onchange=()=>{playRate=+rateSel.value; player.playbackRate=playRate;};
-    body.querySelectorAll('.sent').forEach(el=>el.onclick=()=>playSent(el));
+    body.querySelectorAll('.sent').forEach(el=>{ if(el.dataset.audio) el.onclick=()=>playSent(el); });
   }
 
   function playSent(el){
@@ -371,25 +387,28 @@
     if(revealed){ playCur(); return; }   // 已揭晓时空格=重播
     revealed=true; stopTimer();
     const s=dcur.s; const card=document.getElementById('card');
+    const hasAudio=!!s.audio;
     card.classList.add('reveal');
     card.innerHTML =
       '<div class="cat">'+(s.cat||'')+'</div>'+
       '<div class="cn-prompt" style="font-size:15px;color:var(--muted)">'+s.cn+'</div>'+
       '<div class="jp-big">'+s.jp+'</div>'+
       (s.kana?'<div class="kana-big">'+s.kana+'</div>':'')+
+      (s.ex?'<div class="ex-big">'+s.ex+'</div>':'')+
       '<div class="card-actions">'+
-        '<button class="big-btn replay-btn" id="replayBtn">🔊 重播 (空格)</button>'+
+        (hasAudio?'<button class="big-btn replay-btn" id="replayBtn">🔊 重播 (空格)</button>':'')+
         '<button class="big-btn g-no" id="gNo">不会 (1)</button>'+
         '<button class="big-btn g-mid" id="gMid">不熟 (2)</button>'+
         '<button class="big-btn g-ok" id="gOk">会了 (3)</button>'+
       '</div>';
-    document.getElementById('replayBtn').onclick=playCur;
+    if(hasAudio) document.getElementById('replayBtn').onclick=playCur;
     document.getElementById('gNo').onclick=()=>grade('no');
     document.getElementById('gMid').onclick=()=>grade('mid');
     document.getElementById('gOk').onclick=()=>grade('ok');
     playCur();
   }
   function playCur(){
+    if(!dcur.s.audio) return;   // 词汇卡暂无音频
     player.src=encodeURI(dcur.s.audio); player.playbackRate=playRate;
     player.play().catch(e=>console.warn(e));
   }

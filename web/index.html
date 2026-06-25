@@ -81,6 +81,41 @@
   .empty{color:var(--muted); padding:40px 0}
   #speed{margin-left:auto; font-size:12px; color:var(--muted)}
   #speed select{background:var(--panel2); color:var(--text); border:1px solid var(--border); border-radius:6px; padding:3px 6px}
+  /* mode switch */
+  .mode-switch{display:flex; gap:8px; margin:6px 0 16px}
+  .mode-btn{background:var(--panel); border:1px solid var(--border); color:var(--muted);
+    padding:7px 16px; border-radius:8px; cursor:pointer; font-size:13px}
+  .mode-btn.active{background:var(--accent2); color:#04121f; border-color:var(--accent2); font-weight:600}
+  /* drill */
+  #drill{margin-top:10px}
+  .drill-top{display:flex; align-items:center; gap:14px; font-size:12px; color:var(--muted); margin-bottom:14px; flex-wrap:wrap}
+  .drill-top .prog{font-weight:600; color:var(--text)}
+  .drill-top label{display:flex; align-items:center; gap:5px}
+  .drill-top select{background:var(--panel2); color:var(--text); border:1px solid var(--border); border-radius:6px; padding:2px 6px}
+  .card{
+    background:var(--panel); border:1px solid var(--border); border-radius:16px;
+    padding:34px 28px; min-height:230px; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center; position:relative;
+  }
+  .card .cat{position:absolute; top:14px; left:18px; font-size:12px; color:var(--accent2)}
+  .card .cn-prompt{font-size:24px; color:#cdd9e5; line-height:1.5; margin-bottom:8px}
+  .card .say{font-size:13px; color:var(--muted); margin-top:10px}
+  .timer-wrap{width:100%; max-width:420px; height:6px; background:var(--panel2); border-radius:3px; margin:18px 0 4px; overflow:hidden}
+  .timer-bar{height:100%; background:var(--accent); width:100%; transition:width .1s linear}
+  .reveal .jp-big{font-size:30px; color:var(--jp); margin:6px 0 4px; line-height:1.4}
+  .reveal .kana-big{font-size:15px; color:var(--muted); margin-bottom:6px}
+  .reveal .cn-small{font-size:14px; color:#cdd9e5}
+  .card-actions{display:flex; gap:12px; margin-top:24px; flex-wrap:wrap; justify-content:center}
+  .big-btn{border:none; border-radius:10px; padding:12px 22px; font-size:15px; cursor:pointer; font-weight:600}
+  .reveal-btn{background:var(--accent); color:#04121f}
+  .replay-btn{background:var(--panel2); color:var(--text); border:1px solid var(--border)}
+  .g-no{background:#a23b3b; color:#fff}
+  .g-mid{background:#b5872a; color:#fff}
+  .g-ok{background:var(--play); color:#fff}
+  .big-btn:hover{filter:brightness(1.12)}
+  .drill-done{text-align:center; padding:50px 20px}
+  .drill-done .big{font-size:40px; margin-bottom:10px}
+  .key-hint{font-size:11px; color:var(--muted); margin-top:18px; text-align:center}
   @media(max-width:680px){
     #side{width:150px; flex-basis:150px}
     #main{padding:18px}
@@ -168,7 +203,7 @@
   // ---------- App ----------
   const DATA = window.STUDY_DATA || {days:[], generated:"?"};
   const player = document.getElementById('player');
-  let cur = 0, curTab = 0, playRate = 0.9;
+  let cur = 0, curTab = 0, playRate = 0.9, sentMode = 'browse', thinkSec = 4;
 
   document.getElementById('gen').textContent = "数据更新于 "+DATA.generated;
 
@@ -192,38 +227,166 @@
 
     let sents = '';
     if(d.sentences.length){
-      let lastCat = null, rows='';
-      d.sentences.forEach((s,i)=>{
-        if(s.cat!==lastCat){rows += '<div class="sgroup-title">'+ (s.cat||'例句') +'</div>'; lastCat=s.cat;}
-        rows += '<div class="sent" data-audio="'+encodeURI(s.audio)+'">'+
-          '<button class="play-btn">▶</button>'+
-          '<div class="txt"><div class="jp">'+s.jp+'</div>'+
-          (s.kana?'<div class="kana">'+s.kana+'</div>':'')+
-          (s.cn?'<div class="cn">'+s.cn+'</div>':'')+'</div></div>';
-      });
-      sents = '<div id="sent-wrap"><h2>🔊 例句跟读 <span id="speed">语速 '+
-        '<select id="rate"><option value="1">1.0x</option><option value="0.9" selected>0.9x</option>'+
-        '<option value="0.75">0.75x</option><option value="0.6">0.6x</option></select></span></h2>'+
-        '<div class="hint">点任意一句即可播放（一句一个音频）。再点一次重播。</div>'+rows+'</div>';
+      sents = '<div id="sent-wrap"><h2>🔊 例句跟读</h2>'+
+        '<div class="mode-switch">'+
+        '<button class="mode-btn'+(sentMode==='browse'?' active':'')+'" id="m-browse">📖 浏览</button>'+
+        '<button class="mode-btn'+(sentMode==='drill'?' active':'')+'" id="m-drill">🎯 练习（练本能）</button>'+
+        '</div><div id="sent-body"></div></div>';
     }
 
     m.innerHTML = (tabs?'<div id="tabs">'+tabs+'</div>':'') + '<div class="md">'+body+'</div>' + sents;
     m.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{curTab=+t.dataset.t; renderMain();});
-    const rateSel = document.getElementById('rate');
-    if(rateSel){rateSel.value=String(playRate); rateSel.onchange=()=>{playRate=+rateSel.value; player.playbackRate=playRate;};}
-    m.querySelectorAll('.sent').forEach(el=>el.onclick=()=>playSent(el));
+    if(d.sentences.length){
+      document.getElementById('m-browse').onclick=()=>{stopTimer(); sentMode='browse'; renderMain();};
+      document.getElementById('m-drill').onclick=()=>{sentMode='drill'; renderMain();};
+      if(sentMode==='browse') renderBrowse(d.sentences); else startDrill(d.sentences);
+    }
     m.scrollTop=0;
+  }
+
+  // ---------- 浏览模式 ----------
+  function renderBrowse(sentences){
+    let lastCat=null, rows='';
+    sentences.forEach(s=>{
+      if(s.cat!==lastCat){rows += '<div class="sgroup-title">'+(s.cat||'例句')+'</div>'; lastCat=s.cat;}
+      rows += '<div class="sent" data-audio="'+encodeURI(s.audio)+'">'+
+        '<button class="play-btn">▶</button>'+
+        '<div class="txt"><div class="jp">'+s.jp+'</div>'+
+        (s.kana?'<div class="kana">'+s.kana+'</div>':'')+
+        (s.cn?'<div class="cn">'+s.cn+'</div>':'')+'</div></div>';
+    });
+    const html = '<div class="hint">点任意一句即可播放（一句一个音频），再点重播。'+
+      '<span id="speed" style="margin-left:14px">语速 '+
+      '<select id="rate"><option value="1">1.0x</option><option value="0.9">0.9x</option>'+
+      '<option value="0.75">0.75x</option><option value="0.6">0.6x</option></select></span></div>'+rows;
+    const body = document.getElementById('sent-body'); body.innerHTML = html;
+    const rateSel = document.getElementById('rate');
+    rateSel.value=String(playRate); rateSel.onchange=()=>{playRate=+rateSel.value; player.playbackRate=playRate;};
+    body.querySelectorAll('.sent').forEach(el=>el.onclick=()=>playSent(el));
   }
 
   function playSent(el){
     document.querySelectorAll('.sent.playing').forEach(x=>{x.classList.remove('playing'); x.querySelector('.play-btn').textContent='▶';});
-    const src = el.dataset.audio;
-    player.src = src;
-    player.playbackRate = playRate;
+    player.src = el.dataset.audio; player.playbackRate = playRate;
     el.classList.add('playing'); el.querySelector('.play-btn').textContent='⏸';
     player.play().catch(e=>{el.querySelector('.play-btn').textContent='⚠'; console.warn(e);});
     player.onended = ()=>{el.classList.remove('playing'); el.querySelector('.play-btn').textContent='▶';};
   }
+
+  // ---------- 练习模式（练本能：限时提取 + 自评 + 间隔重测）----------
+  let deck=[], dcur=null, timerId=null, revealed=false, stats={total:0,reps:0}, mastered=new Set();
+  function shuffle(a){a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor((i+1)*((Math.sin((i+1)*99.13)+1)/2))%(i+1); [a[i],a[j]]=[a[j],a[i]];} return a;}
+  function stopTimer(){ if(timerId){clearInterval(timerId); timerId=null;} }
+
+  function startDrill(sentences){
+    deck = shuffle(sentences).map(s=>({s, grade:null}));
+    stats={total:sentences.length, reps:0}; mastered=new Set();
+    nextCard();
+  }
+  function nextCard(){
+    stopTimer();
+    if(!deck.length){ renderDone(); return; }
+    dcur = deck.shift(); revealed=false;
+    renderCard();
+  }
+  function renderCard(){
+    const s = dcur.s;
+    const remain = deck.length;
+    const done = mastered.size;
+    const body = document.getElementById('sent-body');
+    body.innerHTML =
+      '<div class="drill-top"><span class="prog">已掌握 '+done+' / '+stats.total+'</span>'+
+        '<span>· 队列剩 '+remain+'</span>'+
+        '<label>思考时间 <select id="think">'+
+          [3,4,5,7,0].map(v=>'<option value="'+v+'"'+(v===thinkSec?' selected':'')+'>'+(v===0?'不限':v+'秒')+'</option>').join('')+
+        '</select></label>'+
+        '<label>语速 <select id="rate2">'+
+          [1,0.9,0.75,0.6].map(v=>'<option value="'+v+'"'+(v===playRate?' selected':'')+'>'+v+'x</option>').join('')+
+        '</select></label>'+
+      '</div>'+
+      '<div class="card" id="card">'+
+        '<div class="cat">'+(s.cat||'')+'</div>'+
+        '<div class="cn-prompt">'+s.cn+'</div>'+
+        '<div class="say">👄 看中文，<b>出声</b>把日语说出来</div>'+
+        '<div class="timer-wrap"><div class="timer-bar" id="tbar"></div></div>'+
+        '<div class="card-actions"><button class="big-btn reveal-btn" id="revealBtn">揭晓 + 播放 (空格)</button></div>'+
+      '</div>'+
+      '<div class="key-hint">空格=揭晓/重播 · 1=不会 2=不熟 3=会了 · N=下一张</div>';
+    document.getElementById('think').onchange=e=>{thinkSec=+e.target.value; startTimer();};
+    document.getElementById('rate2').onchange=e=>{playRate=+e.target.value; player.playbackRate=playRate;};
+    document.getElementById('revealBtn').onclick=revealCard;
+    startTimer();
+  }
+  function startTimer(){
+    stopTimer();
+    const bar=document.getElementById('tbar'); if(!bar) return;
+    if(thinkSec===0){bar.style.width='100%'; return;}
+    let elapsed=0; const step=100; bar.style.width='100%';
+    timerId=setInterval(()=>{
+      elapsed+=step;
+      const pct=Math.max(0,100-100*elapsed/(thinkSec*1000));
+      bar.style.width=pct+'%';
+      if(elapsed>=thinkSec*1000){ stopTimer(); revealCard(); }
+    }, step);
+  }
+  function revealCard(){
+    if(revealed){ playCur(); return; }   // 已揭晓时空格=重播
+    revealed=true; stopTimer();
+    const s=dcur.s; const card=document.getElementById('card');
+    card.classList.add('reveal');
+    card.innerHTML =
+      '<div class="cat">'+(s.cat||'')+'</div>'+
+      '<div class="cn-prompt" style="font-size:15px;color:var(--muted)">'+s.cn+'</div>'+
+      '<div class="jp-big">'+s.jp+'</div>'+
+      (s.kana?'<div class="kana-big">'+s.kana+'</div>':'')+
+      '<div class="card-actions">'+
+        '<button class="big-btn replay-btn" id="replayBtn">🔊 重播 (空格)</button>'+
+        '<button class="big-btn g-no" id="gNo">不会 (1)</button>'+
+        '<button class="big-btn g-mid" id="gMid">不熟 (2)</button>'+
+        '<button class="big-btn g-ok" id="gOk">会了 (3)</button>'+
+      '</div>';
+    document.getElementById('replayBtn').onclick=playCur;
+    document.getElementById('gNo').onclick=()=>grade('no');
+    document.getElementById('gMid').onclick=()=>grade('mid');
+    document.getElementById('gOk').onclick=()=>grade('ok');
+    playCur();
+  }
+  function playCur(){
+    player.src=encodeURI(dcur.s.audio); player.playbackRate=playRate;
+    player.play().catch(e=>console.warn(e));
+  }
+  function grade(level){
+    if(!revealed) return;
+    dcur.grade=level;
+    if(level==='ok'){ mastered.add(dcur.s.n); }
+    else { mastered.delete(dcur.s.n); stats.reps++; const pos = level==='no'?2:6; deck.splice(Math.min(pos,deck.length),0,dcur); }
+    nextCard();
+  }
+  function renderDone(){
+    stopTimer();
+    document.getElementById('sent-body').innerHTML =
+      '<div class="drill-done"><div class="big">🎉</div>'+
+      '<div style="font-size:18px">这一轮全部「会了」！</div>'+
+      '<div style="color:var(--muted);margin-top:8px">本轮额外重测了 '+stats.reps+' 次（不会/不熟的句子被杀了回马枪）。</div>'+
+      '<div class="card-actions" style="margin-top:24px">'+
+        '<button class="big-btn g-ok" id="again">再来一轮（重新打散）</button>'+
+        '<button class="big-btn replay-btn" id="toBrowse">回到浏览</button>'+
+      '</div></div>';
+    document.getElementById('again').onclick=()=>startDrill(DATA.days[cur].sentences);
+    document.getElementById('toBrowse').onclick=()=>{sentMode='browse'; renderMain();};
+  }
+
+  // 键盘快捷键（仅练习模式）
+  document.addEventListener('keydown', e=>{
+    if(sentMode!=='drill' || !DATA.days[cur] || !DATA.days[cur].sentences.length) return;
+    if(e.target.tagName==='SELECT') return;
+    if(e.code==='Space'){ e.preventDefault(); revealed?playCur():revealCard(); }
+    else if(!revealed) return;
+    else if(e.key==='1') grade('no');
+    else if(e.key==='2') grade('mid');
+    else if(e.key==='3') grade('ok');
+    else if(e.key.toLowerCase()==='n') grade(dcur.grade||'mid');
+  });
 
   renderSidebar();
   renderMain();

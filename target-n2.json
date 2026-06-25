@@ -15,7 +15,7 @@
     "grammar_n2": {
       "target_points": 119,
       "mastered": 0,
-      "learning": 0,
+      "learning": 1,
       "coverage_pct": 0,
       "chat_coverable_ratio": "约 70%，其余偏书面，需靠阅读+专练（见 needs_drill）",
       "note": "mastered = 该型在 ledger.json 里 mastery>=4。覆盖率每次会话后由 skill 重算。"
@@ -28,7 +28,7 @@
     "vocab": {
       "target_cumulative": 3300,
       "n2_new": 850,
-      "active_in_ledger": 20,
+      "active_in_ledger": 24,
       "note": "不枚举 6000 词。聊天时从 90 文件按当前话题捞词进 ledger；这里只追踪'已激活进 ledger 的活词数'朝目标增长。"
     },
     "kanji": {
@@ -234,6 +234,8 @@
   },
   "progress": {
     "_comment": "skill 每次会话后回写：键=语法型(用 grammar_inventory 里的写法)，值=状态 learning|mastered。空=还没碰。当前 ledger 里的 で/に/たい/かもしれない 等属 N4/N5 地基，不在 N2 清单内，所以 N2 语法覆盖现为 0——这是真实起点：先打地基，再爬 N2。",
-    "covered": {}
+    "covered": {
+      "〜からといって": "learning"
+    }
   }
 }

@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>日语学习日志</title>
+<style>
+  :root{
+    --bg:#0f1419; --panel:#161b22; --panel2:#1c232c; --border:#2a313c;
+    --text:#e6edf3; --muted:#8b98a5; --accent:#4cc2ff; --accent2:#7ee787;
+    --jp:#ffd479; --play:#2ea043;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{
+    font-family:-apple-system,"PingFang SC","Hiragino Sans",system-ui,sans-serif;
+    background:var(--bg); color:var(--text); display:flex; height:100vh; overflow:hidden;
+  }
+  /* sidebar */
+  #side{
+    width:230px; flex:0 0 230px; background:var(--panel); border-right:1px solid var(--border);
+    overflow-y:auto; padding:16px 12px;
+  }
+  #side h1{font-size:15px; margin:0 0 4px; letter-spacing:.5px}
+  #side .sub{font-size:11px; color:var(--muted); margin-bottom:16px}
+  .day{margin-bottom:6px}
+  .day-btn{
+    width:100%; text-align:left; background:transparent; border:1px solid transparent;
+    color:var(--text); padding:9px 11px; border-radius:8px; cursor:pointer; font-size:13px;
+  }
+  .day-btn:hover{background:var(--panel2)}
+  .day-btn.active{background:var(--panel2); border-color:var(--accent); color:var(--accent)}
+  .day-btn .cnt{float:right; color:var(--muted); font-size:11px}
+  /* main */
+  #main{flex:1; overflow-y:auto; padding:28px 40px 80px; max-width:920px}
+  #tabs{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px}
+  .tab{
+    background:var(--panel); border:1px solid var(--border); color:var(--muted);
+    padding:7px 14px; border-radius:20px; cursor:pointer; font-size:13px;
+  }
+  .tab.active{background:var(--accent); color:#04121f; border-color:var(--accent); font-weight:600}
+  /* markdown */
+  .md{line-height:1.75; font-size:15px}
+  .md h1{font-size:24px; border-bottom:1px solid var(--border); padding-bottom:8px; margin-top:0}
+  .md h2{font-size:19px; margin-top:30px; color:var(--accent)}
+  .md h3{font-size:16px; margin-top:22px; color:var(--accent2)}
+  .md blockquote{margin:12px 0; padding:8px 16px; border-left:3px solid var(--accent);
+    background:var(--panel); border-radius:0 8px 8px 0; color:#cdd9e5}
+  .md table{border-collapse:collapse; width:100%; margin:14px 0; font-size:14px; display:block; overflow-x:auto}
+  .md th,.md td{border:1px solid var(--border); padding:7px 11px; text-align:left}
+  .md th{background:var(--panel2)}
+  .md code{background:var(--panel2); padding:2px 6px; border-radius:5px; font-size:13px; color:var(--jp)}
+  .md pre{background:var(--panel); padding:14px; border-radius:8px; overflow-x:auto; border:1px solid var(--border)}
+  .md pre code{background:none; padding:0; color:var(--text)}
+  .md hr{border:none; border-top:1px solid var(--border); margin:24px 0}
+  .md strong{color:#fff}
+  .md a{color:var(--accent)}
+  .md ul,.md ol{padding-left:24px}
+  /* sentences */
+  #sent-wrap{margin-top:40px; border-top:2px dashed var(--border); padding-top:26px}
+  #sent-wrap h2{font-size:20px; color:var(--accent); margin:0 0 4px}
+  #sent-wrap .hint{font-size:12px; color:var(--muted); margin-bottom:18px}
+  .sgroup-title{font-size:13px; color:var(--accent2); margin:22px 0 8px; font-weight:600}
+  .sent{
+    display:flex; align-items:center; gap:14px; background:var(--panel);
+    border:1px solid var(--border); border-radius:10px; padding:12px 14px; margin-bottom:9px;
+    cursor:pointer; transition:border-color .15s,background .15s;
+  }
+  .sent:hover{border-color:var(--accent); background:var(--panel2)}
+  .sent.playing{border-color:var(--play); background:#13251a}
+  .play-btn{
+    flex:0 0 38px; width:38px; height:38px; border-radius:50%; border:none;
+    background:var(--play); color:#fff; font-size:15px; cursor:pointer; display:flex;
+    align-items:center; justify-content:center;
+  }
+  .play-btn:hover{filter:brightness(1.15)}
+  .sent .txt{flex:1; min-width:0}
+  .sent .jp{font-size:17px; color:var(--jp); margin-bottom:2px}
+  .sent .kana{font-size:12px; color:var(--muted)}
+  .sent .cn{font-size:13px; color:#cdd9e5; margin-top:2px}
+  .empty{color:var(--muted); padding:40px 0}
+  #speed{margin-left:auto; font-size:12px; color:var(--muted)}
+  #speed select{background:var(--panel2); color:var(--text); border:1px solid var(--border); border-radius:6px; padding:3px 6px}
+  @media(max-width:680px){
+    #side{width:150px; flex-basis:150px}
+    #main{padding:18px}
+  }
+</style>
+</head>
+<body>
+  <nav id="side">
+    <h1>📒 学习日志</h1>
+    <div class="sub" id="gen"></div>
+    <div id="daylist"></div>
+  </nav>
+  <main id="main"><div class="empty">加载中…（若空白，请先运行 tools/build_study_web.py 生成 data.js）</div></main>
+
+  <audio id="player"></audio>
+  <script src="data.js"></script>
+  <script>
+  // ---------- 轻量 Markdown 渲染器（够用：标题/表格/引用/列表/代码/粗体/链接/hr）----------
+  function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+  function inline(s){
+    s = esc(s);
+    s = s.replace(/`([^`]+)`/g,'<code>$1</code>');
+    s = s.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
+    s = s.replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2">$1</a>');
+    return s;
+  }
+  function renderMd(md){
+    const lines = md.split(/\r?\n/);
+    let html="", i=0;
+    function flushList(type, items){
+      html += "<"+type+">"+items.map(x=>"<li>"+inline(x)+"</li>").join("")+"</"+type+">";
+    }
+    while(i<lines.length){
+      let ln = lines[i];
+      // code fence
+      if(/^```/.test(ln)){
+        let buf=[]; i++;
+        while(i<lines.length && !/^```/.test(lines[i])){buf.push(lines[i]); i++;}
+        i++; html += "<pre><code>"+esc(buf.join("\n"))+"</code></pre>"; continue;
+      }
+      // table
+      if(/^\s*\|.*\|\s*$/.test(ln) && i+1<lines.length && /^\s*\|?[\s:|-]+\|?\s*$/.test(lines[i+1])){
+        const parseRow = r => r.trim().replace(/^\|/,'').replace(/\|$/,'').split('|').map(c=>c.trim());
+        let head = parseRow(ln); i+=2; let rows=[];
+        while(i<lines.length && /^\s*\|.*\|\s*$/.test(lines[i])){rows.push(parseRow(lines[i])); i++;}
+        html += "<table><thead><tr>"+head.map(h=>"<th>"+inline(h)+"</th>").join("")+"</tr></thead><tbody>";
+        html += rows.map(r=>"<tr>"+r.map(c=>"<td>"+inline(c)+"</td>").join("")+"</tr>").join("");
+        html += "</tbody></table>"; continue;
+      }
+      // headings
+      let mh = ln.match(/^(#{1,6})\s+(.*)$/);
+      if(mh){html += "<h"+mh[1].length+">"+inline(mh[2])+"</h"+mh[1].length+">"; i++; continue;}
+      // hr
+      if(/^\s*---+\s*$/.test(ln)){html+="<hr>"; i++; continue;}
+      // blockquote
+      if(/^\s*>/.test(ln)){
+        let buf=[];
+        while(i<lines.length && /^\s*>/.test(lines[i])){buf.push(lines[i].replace(/^\s*>\s?/,'')); i++;}
+        html += "<blockquote>"+buf.map(inline).join("<br>")+"</blockquote>"; continue;
+      }
+      // unordered list
+      if(/^\s*[-*]\s+/.test(ln)){
+        let items=[];
+        while(i<lines.length && /^\s*[-*]\s+/.test(lines[i])){items.push(lines[i].replace(/^\s*[-*]\s+/,'')); i++;}
+        flushList("ul", items); continue;
+      }
+      // ordered list
+      if(/^\s*\d+\.\s+/.test(ln)){
+        let items=[];
+        while(i<lines.length && /^\s*\d+\.\s+/.test(lines[i])){items.push(lines[i].replace(/^\s*\d+\.\s+/,'')); i++;}
+        flushList("ol", items); continue;
+      }
+      // blank
+      if(/^\s*$/.test(ln)){i++; continue;}
+      // paragraph (gather until blank)
+      let buf=[ln]; i++;
+      while(i<lines.length && !/^\s*$/.test(lines[i]) && !/^(#{1,6}\s|>|\s*[-*]\s|\s*\d+\.\s|```|\s*\|)/.test(lines[i])){
+        buf.push(lines[i]); i++;
+      }
+      html += "<p>"+buf.map(inline).join("<br>")+"</p>";
+    }
+    return html;
+  }
+
+  // ---------- App ----------
+  const DATA = window.STUDY_DATA || {days:[], generated:"?"};
+  const player = document.getElementById('player');
+  let cur = 0, curTab = 0, playRate = 0.9;
+
+  document.getElementById('gen').textContent = "数据更新于 "+DATA.generated;
+
+  function renderSidebar(){
+    const dl = document.getElementById('daylist');
+    if(!DATA.days.length){dl.innerHTML='<div class="empty" style="font-size:12px">暂无日志</div>'; return;}
+    dl.innerHTML = DATA.days.map((d,idx)=>{
+      const n = d.sentences.length;
+      return '<div class="day"><button class="day-btn'+(idx===cur?' active':'')+'" data-i="'+idx+'">'+
+        d.date+'<span class="cnt">'+(n?n+'句':'')+'</span></button></div>';
+    }).join('');
+    dl.querySelectorAll('.day-btn').forEach(b=>b.onclick=()=>{cur=+b.dataset.i; curTab=0; renderSidebar(); renderMain();});
+  }
+
+  function renderMain(){
+    const d = DATA.days[cur];
+    const m = document.getElementById('main');
+    if(!d){m.innerHTML='<div class="empty">没有数据</div>'; return;}
+    let tabs = d.logs.map((lg,i)=>'<button class="tab'+(i===curTab?' active':'')+'" data-t="'+i+'">'+lg.title+'</button>').join('');
+    let body = d.logs.length ? renderMd(d.logs[curTab].md) : '<div class="empty">这天没有日志正文</div>';
+
+    let sents = '';
+    if(d.sentences.length){
+      let lastCat = null, rows='';
+      d.sentences.forEach((s,i)=>{
+        if(s.cat!==lastCat){rows += '<div class="sgroup-title">'+ (s.cat||'例句') +'</div>'; lastCat=s.cat;}
+        rows += '<div class="sent" data-audio="'+encodeURI(s.audio)+'">'+
+          '<button class="play-btn">▶</button>'+
+          '<div class="txt"><div class="jp">'+s.jp+'</div>'+
+          (s.kana?'<div class="kana">'+s.kana+'</div>':'')+
+          (s.cn?'<div class="cn">'+s.cn+'</div>':'')+'</div></div>';
+      });
+      sents = '<div id="sent-wrap"><h2>🔊 例句跟读 <span id="speed">语速 '+
+        '<select id="rate"><option value="1">1.0x</option><option value="0.9" selected>0.9x</option>'+
+        '<option value="0.75">0.75x</option><option value="0.6">0.6x</option></select></span></h2>'+
+        '<div class="hint">点任意一句即可播放（一句一个音频）。再点一次重播。</div>'+rows+'</div>';
+    }
+
+    m.innerHTML = (tabs?'<div id="tabs">'+tabs+'</div>':'') + '<div class="md">'+body+'</div>' + sents;
+    m.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{curTab=+t.dataset.t; renderMain();});
+    const rateSel = document.getElementById('rate');
+    if(rateSel){rateSel.value=String(playRate); rateSel.onchange=()=>{playRate=+rateSel.value; player.playbackRate=playRate;};}
+    m.querySelectorAll('.sent').forEach(el=>el.onclick=()=>playSent(el));
+    m.scrollTop=0;
+  }
+
+  function playSent(el){
+    document.querySelectorAll('.sent.playing').forEach(x=>{x.classList.remove('playing'); x.querySelector('.play-btn').textContent='▶';});
+    const src = el.dataset.audio;
+    player.src = src;
+    player.playbackRate = playRate;
+    el.classList.add('playing'); el.querySelector('.play-btn').textContent='⏸';
+    player.play().catch(e=>{el.querySelector('.play-btn').textContent='⚠'; console.warn(e);});
+    player.onended = ()=>{el.classList.remove('playing'); el.querySelector('.play-btn').textContent='▶';};
+  }
+
+  renderSidebar();
+  renderMain();
+  </script>
+</body>
+</html>

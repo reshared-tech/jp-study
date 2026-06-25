@@ -24,6 +24,43 @@ DATE_RE = re.compile(r"(\d{4}-\d{2}-\d{2})-(.+)\.md$")
 SENT_RE = re.compile(r"^\s*(\d+)\.\s+(.*\S)\s*$")
 H2_RE = re.compile(r"^##\s+(.*\S)\s*$")
 
+# ---------- 内置「基础卡」：数字/月份/日期/星期（侧栏独立条目，可浏览+练习）----------
+# 每项 (prompt 提示, reading 读法, written 书写形可空)；prompt 不暴露读法，逼提取
+NUMS = [("1","いち",""),("2","に",""),("3","さん",""),("4","よん",""),("5","ご",""),
+        ("6","ろく",""),("7","なな",""),("8","はち",""),("9","きゅう",""),("10","じゅう","")]
+MONTHS = [(f"{i}月", r, f"{i}月") for i,r in zip(range(1,13),
+        ["いちがつ","にがつ","さんがつ","しがつ","ごがつ","ろくがつ","しちがつ",
+         "はちがつ","くがつ","じゅうがつ","じゅういちがつ","じゅうにがつ"])]
+DAYS = [(f"{i}日", r, f"{i}日") for i,r in zip(range(1,32),
+        ["ついたち","ふつか","みっか","よっか","いつか","むいか","なのか","ようか","ここのか","とおか",
+         "じゅういちにち","じゅうににち","じゅうさんにち","じゅうよっか","じゅうごにち","じゅうろくにち",
+         "じゅうしちにち","じゅうはちにち","じゅうくにち","はつか","にじゅういちにち","にじゅうににち",
+         "にじゅうさんにち","にじゅうよっか","にじゅうごにち","にじゅうろくにち","にじゅうしちにち",
+         "にじゅうはちにち","にじゅうくにち","さんじゅうにち","さんじゅういちにち"])]
+WEEK = [("周一","げつようび","月曜日"),("周二","かようび","火曜日"),("周三","すいようび","水曜日"),
+        ("周四","もくようび","木曜日"),("周五","きんようび","金曜日"),("周六","どようび","土曜日"),
+        ("周日","にちようび","日曜日")]
+
+BASIC_DECKS = [
+    {"slug":"num",   "label":"🔢 数字 1–10",  "intro":"看数字，限时说出日语读法。4/7/9 各有两读，这里用最安全的 よん／なな／きゅう。", "items":NUMS},
+    {"slug":"month", "label":"📅 月份 1–12月", "intro":"看「N月」，说读法。★ 4月=しがつ、7月=しちがつ、9月=くがつ（不用 よん/なな/きゅう）。", "items":MONTHS},
+    {"slug":"day",   "label":"📆 日期 1–31日", "intro":"日期读法大量不规则。重点：1–10日 + 14日(じゅうよっか)·20日(はつか)·24日(にじゅうよっか)。", "items":DAYS},
+    {"slug":"week",  "label":"🗓 星期",        "intro":"看中文星期，说日语。钩子：月火水木金土日。", "items":WEEK},
+]
+
+def build_basic_days():
+    days = []
+    for deck in BASIC_DECKS:
+        sents = []
+        for i,(prompt, reading, written) in enumerate(deck["items"], 1):
+            sents.append({"n": i, "cat": deck["label"], "jp": reading, "kana": written, "cn": prompt})
+        days.append({
+            "date": deck["label"], "slug": deck["slug"], "kind": "basic",
+            "logs": [{"title": deck["label"], "md": "# "+deck["label"]+"\n\n"+deck["intro"]}],
+            "sentences": sents,
+        })
+    return days
+
 
 def parse_sentences(path):
     """从'跟读例句'文件解析： N. 日文 / 假名 / 中文（注）"""
@@ -67,8 +104,12 @@ def collect():
         if "跟读例句" in title:
             d["sentences"] = parse_sentences(path)
         else:
+            d.setdefault("kind", "log")
             d["logs"].append({"title": title, "md": md})
-    return [days[k] for k in sorted(days.keys(), reverse=True)]
+    dated = [days[k] for k in sorted(days.keys(), reverse=True)]
+    for d in dated:
+        d.setdefault("kind", "log")
+    return dated + build_basic_days()
 
 
 async def synth(text, path):
@@ -78,8 +119,9 @@ async def synth(text, path):
 async def gen_audio(days):
     tasks = []
     for d in days:
+        slug = d.get("slug", d["date"])
         for s in d["sentences"]:
-            fname = f"{d['date']}-s{s['n']:02d}.mp3"
+            fname = f"{slug}-s{s['n']:02d}.mp3"
             fpath = os.path.join(AUDIO_DIR, fname)
             rel = os.path.join("..", "音频", "句子", fname)
             s["audio"] = rel.replace(os.sep, "/")

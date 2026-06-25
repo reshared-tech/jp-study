@@ -31,6 +31,7 @@
   .day-btn:hover{background:var(--panel2)}
   .day-btn.active{background:var(--panel2); border-color:var(--accent); color:var(--accent)}
   .day-btn .cnt{float:right; color:var(--muted); font-size:11px}
+  .side-sec{font-size:11px; color:var(--muted); margin:16px 0 6px; padding-left:4px; letter-spacing:.5px}
   /* main */
   #main{flex:1; overflow-y:auto; padding:28px 40px 80px; max-width:920px}
   #tabs{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px}
@@ -210,12 +211,18 @@
   function renderSidebar(){
     const dl = document.getElementById('daylist');
     if(!DATA.days.length){dl.innerHTML='<div class="empty" style="font-size:12px">暂无日志</div>'; return;}
-    dl.innerHTML = DATA.days.map((d,idx)=>{
-      const n = d.sentences.length;
-      return '<div class="day"><button class="day-btn'+(idx===cur?' active':'')+'" data-i="'+idx+'">'+
-        d.date+'<span class="cnt">'+(n?n+'句':'')+'</span></button></div>';
-    }).join('');
-    dl.querySelectorAll('.day-btn').forEach(b=>b.onclick=()=>{cur=+b.dataset.i; curTab=0; renderSidebar(); renderMain();});
+    const btn = (d,idx,unit)=>'<div class="day"><button class="day-btn'+(idx===cur?' active':'')+'" data-i="'+idx+'">'+
+        d.date+'<span class="cnt">'+(d.sentences.length?d.sentences.length+unit:'')+'</span></button></div>';
+    let html='';
+    const logs = DATA.days.map((d,i)=>({d,i})).filter(x=>x.d.kind!=='basic');
+    const basics = DATA.days.map((d,i)=>({d,i})).filter(x=>x.d.kind==='basic');
+    html += logs.map(x=>btn(x.d,x.i,'句')).join('');
+    if(basics.length){
+      html += '<div class="side-sec">🧱 基础卡</div>';
+      html += basics.map(x=>btn(x.d,x.i,'项')).join('');
+    }
+    dl.innerHTML = html;
+    dl.querySelectorAll('.day-btn').forEach(b=>b.onclick=()=>{stopTimer(); cur=+b.dataset.i; curTab=0; sentMode='browse'; renderSidebar(); renderMain();});
   }
 
   function renderMain(){

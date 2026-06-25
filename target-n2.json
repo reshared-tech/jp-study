@@ -28,7 +28,7 @@
     "vocab": {
       "target_cumulative": 3300,
       "n2_new": 850,
-      "active_in_ledger": 24,
+      "active_in_ledger": 37,
       "note": "不枚举 6000 词。聊天时从 90 文件按当前话题捞词进 ledger；这里只追踪'已激活进 ledger 的活词数'朝目标增长。"
     },
     "kanji": {

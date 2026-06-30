@@ -25,9 +25,9 @@
     },
     "grammar_n3_prereq": {
       "target_points": 95,
-      "mastered": 0,
-      "learning": 4,
-      "status": "★当前主战场(2026-06-25定级后)",
+      "mastered": 1,
+      "learning": 3,
+      "status": "★当前主战场(2026-06-25定级后)。2026-06-30 にとって 升 mastered(首个N3 mastered)",
       "note": "定级显示断层在N3。这是现阶段第一优先：先把 grammar_inventory_n3 过完并练成主动，再上 N2。mastered=该型在 ledger mastery>=4。"
     },
     "vocab": {
@@ -43,9 +43,16 @@
         "source": "大纲/词汇.md ## N5（约 700 词｜入门基础）",
         "total": 730,
         "categories_total": 26,
-        "active_in_ledger_est": 25,
+        "active_in_ledger_est": 80,
         "mastered_est": 8,
-        "_note": "active/mastered 为估算,下次会话起按 by_category 逐类核对回写(把已进 ledger 的 N5 词对到所属类)。",
+        "confirmed_known": 104,
+        "_note": "覆盖刷题模式:逐类 sweep。confirmed_known=已秒说确认的词(计入覆盖,不全进SRS账本,避免无谓复习);只把缺口词进 ledger 做SRS。active/mastered 估算,逐类核对。",
+        "swept": {
+          "_comment": "已系统刷过的类:known=确认掌握(秒说对),drilling=缺口已进ledger做SRS。",
+          "食物·饮品": { "total": 53, "known": 39, "drilling": 12, "swept_on": "2026-06-29", "drill_progress": "同日造句:11/12升mastery2(已主动用对);仅アイスクリーム形仍挣扎(掉ク)。下次到期(07-02)再验,稳了升掌握", "gaps": ["食事","お湯","醤油","みかん","ぶどう","いちご","飴","ジュース","味","ケーキ","アイスクリーム","コップ"] },
+          "一类形容词": { "total": 65, "known": 65, "swept_on": "2026-06-29", "queued_gaps": [], "drill_progress": "★全类通关:37秒说会+28缺口经反复练3轮全部一次说对,均进ledger(mastery2,07-02到期复验稳了升掌握)。queued清零。辨析点:はやい(速い快/早い早)、やさしい(易しい容易/優しい温柔)、あつい(暑い天热/熱い烫/厚い厚)、少し(副词)vs少ない(形容词)、冷たい(冰)vs涼しい(凉爽)、高い反义(低い高度/安い价钱)" }
+        },
+        "known_by_category": { "食物·饮品": 39, "一类形容词": 65 },
         "by_category": {
           "人称与指示": 28, "疑问词": 10, "数字与计数": 25, "时间·日期": 42, "星期·月份": 23,
           "家庭与人际": 34, "职业与身份": 14, "身体": 14, "颜色": 9, "自然·天气": 19,
@@ -134,7 +141,9 @@
       "〜でも": "learning",
       "〜ましょう/ましょうか": "learning",
       "〜と思う": "learning",
-      "〜たり〜たり": "learning"
+      "〜たり〜たり": "learning",
+      "〜より〜のほうが": "learning",
+      "そう(様態/伝聞)": "learning"
     }
   },
   "grammar_inventory_n2": {
@@ -331,7 +340,7 @@
     "covered": {
       "〜のに": "learning",
       "〜たり〜たり": "learning",
-      "〜にとって": "learning",
+      "〜にとって": "mastered",
       "〜について": "learning"
     }
   },

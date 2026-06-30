@@ -4,7 +4,21 @@
     "goal": "JLPT N2",
     "milestones": { "n5_full_mastery": "进行中(2026-06-28起)。硬定义(2026-06-28用户明确):全面覆盖 大纲/词汇.md 的 N5 段(730词/26类) + 大纲/语法.md 章一~八的 N5 核心语法(见 grammar_inventory_n5)。覆盖=该项进 ledger;达成=全部 mastery>=4 且 grammar_inventory_n5 全部 progress_n5=mastered。详见 components.n5_milestone。", "n3_exam": "2026-12", "n2_exam": "2027", "_comment": "2026-06-25 定级后改为里程碑式：先冲N3(2026-12考)再冲N2(2027)。2026-06-28 用户加里程碑'完全掌握N5'并锚定到大纲:N5全部词汇(730)+全部N5语法都要覆盖且练成主动,才算达成。定级'N5稳'只是识别级,产出跟不上。" },
     "exam_date": "2026-12",
-    "intensity": { "phase": "点火期(2026-06-25起)", "daily_breadth_minutes": 120, "primary_engines": ["N3语法专练", "词汇SRS(每天~15词)"], "secondary": ["阅读NHK Easy每周≥2", "聊天保深度", "6-8周后N3模考"] },
+    "intensity": {
+      "phase": "双轨期(2026-06-30校正起): N5深耕 ‖ N3点火 同步",
+      "_why": "复盘发现前几天实际只跑了N5深耕,N3主战场(2026-12考)几乎没动(4/73)、阅读欠账、听力0。校正为双轨并行,别再单日连刷N5新词。",
+      "daily_breadth_minutes": 120,
+      "session_template": {
+        "_comment": "每次 /jp-chat 会话按这4段走(Step1聊天里自然融合,不必生硬分段)。",
+        "1_到期复验": "必做:先清 due<=今天 的项,重点盘 mastery<=2 的积压(95活词里62个卡在mastery2,真假会要复验)",
+        "2_N5深耕": "半场:扫1个词汇类的一批(看中文秒说→缺口反复练到一次说对) 或 推进N5语法。目标把覆盖率从14%往上推",
+        "3_N3点火": "半场:缺口驱动挑1-2个未覆盖N3语法点(grammar_inventory_n3),用观点话题逼产出。优先未碰组:9.4条件(ば/たら/なら)、9.7授受(てあげる/くれる/もらう)、9.1时间(てから/たばかり)、9.14义务建议(なきゃ/ほうがいい/べき)",
+        "4_模块": "按周节奏穿插:阅读NHK Easy≥2/周、听力≥1/周(均欠账,优先补阅读)"
+      },
+      "primary_engines": ["N5深耕(词汇覆盖+语法掌握)", "N3点火(语法缺口驱动)", "到期复验(清mastery2积压)"],
+      "secondary": ["阅读NHK Easy每周≥2(欠账)", "听力每周≥1(未启动)", "8月中旬N3模考"],
+      "cadence_rule": "单场不再连刷3场N5新词;每场=复验+N5半场+N3半场,周内补阅读/听力。"
+    },
     "placement_2026-06-25": { "summary": "N5/N4 稳；N3 断层(のに✗/にとって不会，てから✓)；N2 基本空白(只会昨天教的からといって)。结论:N4地基实,真实工作区=N3。", "method": "15题速测 N5→N2 by 难度" },
     "after_n2": "再用考试方式冲 N1（见 memory: learning-strategy-life-then-exam）",
     "sources": {
@@ -26,8 +40,8 @@
     "grammar_n3_prereq": {
       "target_points": 95,
       "mastered": 1,
-      "learning": 3,
-      "status": "★当前主战场(2026-06-25定级后)。2026-06-30 にとって 升 mastered(首个N3 mastered)",
+      "learning": 5,
+      "status": "★当前主战场。2026-06-30 にとって升mastered(首个);双轨期点火条件群〜たら/〜なら(9.4)。覆盖6/73",
       "note": "定级显示断层在N3。这是现阶段第一优先：先把 grammar_inventory_n3 过完并练成主动，再上 N2。mastered=该型在 ledger mastery>=4。"
     },
     "vocab": {
@@ -79,7 +93,7 @@
       "type": "module（聊天覆盖不到，必须并行）",
       "why": "N2 阅读是限时的中长论说/说明文，聊天给不了那个量和速度。",
       "cadence": "每周 ≥2 篇限时短文（NHK NEWS WEB EASY → 普通 NHK → 真题）",
-      "status": "执行中。2026-06-26读「セブン銀行ATMやさしい日本語」(やさにちウォッチ),大意+因果推理全对;自然复现やすい,捞出たり/確認。本周还需≥1篇"
+      "status": "执行中。2026-06-30读自编やさしい日本語短文(自炊/攒钱主题,全用已学词+〜たら),大意3问+推理全对(働く配で也对)。2026-06-26读过セブン銀行ATM文。本周达标(≥2)。下周继续NHK Easy"
     },
     "listening": {
       "type": "module（部分靠聊天，考试题型需专练）",
@@ -341,7 +355,9 @@
       "〜のに": "learning",
       "〜たり〜たり": "learning",
       "〜にとって": "mastered",
-      "〜について": "learning"
+      "〜について": "learning",
+      "〜たら": "learning",
+      "〜なら": "learning"
     }
   },
   "progress": {

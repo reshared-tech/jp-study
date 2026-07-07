@@ -12,113 +12,2237 @@
       "distinct_scenes_min": 2,
       "_comment": "同时满足 mastery>=4 且 active_output>=3 且 scenes>=2 才算'掌握'，复习频率自然拉长"
     },
-    "srs_intervals_days": [1, 1, 3, 7, 16, 35],
+    "srs_intervals_days": [
+      1,
+      1,
+      3,
+      7,
+      16,
+      35
+    ],
     "_srs_comment": "下标=mastery(0-5)，值=距上次出现多少天后该再复现",
-    "last_session": "2026-06-30",
+    "last_session": "2026-07-03",
     "world": {
-      "characters": ["用户", "对象", "对象弟弟", "家人"],
-      "events": ["东京买房/看房", "中国人赴日打工", "白熊咖啡厅(看动画)"],
-      "interests": ["日本买房", "技术/自动化/效率工具", "学习方法/知识组织", "分析拆解系统、推演结果"]
+      "characters": [
+        "用户",
+        "对象",
+        "对象弟弟",
+        "家人"
+      ],
+      "events": [
+        "东京买房/看房",
+        "中国人赴日打工",
+        "白熊咖啡厅(看动画)"
+      ],
+      "interests": [
+        "日本买房",
+        "技术/自动化/效率工具",
+        "学习方法/知识组织",
+        "分析拆解系统、推演结果"
+      ]
     }
   },
   "items": [
-    { "id": "renyoukei", "type": "concept", "jp": "連用形", "kana": "れんようけい", "gloss": "万能接口：ます形去掉ます（働き/住み/食べ），后接 たい/やすい/ながら/ましょう 等", "example": "働きます → 働き", "first_seen": "2026-06-24", "last_seen": "2026-06-28", "exposures": 3, "active_output": 2, "scenes": ["赴日打工"], "connections": ["tai", "yasui", "mashou"], "mastery": 3, "due": "2026-07-05", "notes": "ましょう(行きましょう/帰りましょう)又一次靠連用形接口" },
-    { "id": "de-particle", "type": "grammar", "jp": "で", "kana": "", "gloss": "动作的舞台 + 手段（用…）", "example": "日本で働く。/ 現金で払う。", "first_seen": "2026-06-24", "last_seen": "2026-06-28", "exposures": 5, "active_output": 4, "scenes": ["赴日打工", "便利店/現金で"], "connections": ["ni-particle", "hataraku", "kasegu"], "mastery": 4, "due": "2026-07-14", "notes": "★已掌握。与 に 对比：真做事用で。手段用法:現金で(再次用对)。★对比坑(2026-06-26):同一地点看动词选助词——コンビニに行く(に,行=落点) vs コンビニで買う(で,买=动作舞台)。用户曾误说コンビニに買う,纠正" },
-    { "id": "ni-particle", "type": "grammar", "jp": "に", "kana": "", "gloss": "存在/落点/居住（场所助词）", "example": "日本に住む。/ コンビニに行く。", "first_seen": "2026-06-24", "last_seen": "2026-06-28", "exposures": 6, "active_output": 5, "scenes": ["赴日打工", "便利店", "咖啡厅"], "connections": ["de-particle", "sumu", "iku", "nokoru", "tsutomeru", "kaeru"], "mastery": 4, "due": "2026-07-14", "notes": "★已掌握。いる/ある/住む/行く/残る/勤める 用に；本次'コンビニに行きましょう'+'家に帰りたい'再次用对" },
-    { "id": "tai", "type": "grammar", "jp": "〜たい", "kana": "", "gloss": "想做……（接連用形，非た形）", "example": "日本で働きたい。", "first_seen": "2026-06-24", "last_seen": "2026-06-28", "exposures": 6, "active_output": 5, "scenes": ["赴日打工", "亏不亏/国に帰りたい", "咖啡厅"], "connections": ["renyoukei", "kasegu", "kaeru"], "mastery": 4, "due": "2026-07-14", "notes": "★已掌握：本次'飲みたい/帰りたい'再用对。★た形(过去)易混。★たい像い形容词,后接から/ので不加だ(飲みたいから○ 飲みたいだから✗)" },
-    { "id": "yasui", "type": "grammar", "jp": "〜やすい", "kana": "", "gloss": "好…… / 容易……（接連用形）", "example": "日本は住みやすい。/ 分かりやすい。", "first_seen": "2026-06-24", "last_seen": "2026-06-30", "exposures": 4, "active_output": 2, "scenes": ["赴日打工", "ATM新闻/分かりやすい", "双轨复验"], "connections": ["renyoukei", "sumu"], "mastery": 3, "due": "2026-07-07", "notes": "NHK阅读里复现'分かりやすい'(达2场景)。仅识别未主动产出,差1次输出即可升" },
-    { "id": "kamoshirenai", "type": "grammar", "jp": "〜かもしれない", "kana": "", "gloss": "也许 / 说不定（接普通形，句尾，没把握）", "example": "帰るかもしれない。", "first_seen": "2026-06-24", "last_seen": "2026-06-28", "exposures": 3, "active_output": 2, "scenes": ["赴日打工", "咖啡厅"], "connections": ["kaeru", "nokoru", "tabun"], "mastery": 3, "due": "2026-07-05", "notes": "假名顺序易写反：かも・し・れ・ない。本次'家に帰りたいかもしれない'主动用对。与多分(たぶん,句中副词,较肯定)对比:かもしれない句尾、没把握" },
-    { "id": "node", "type": "grammar", "jp": "〜ので", "kana": "", "gloss": "因为……（客观、柔和）", "example": "住みやすいので、住みたいです。", "first_seen": "2026-06-24", "last_seen": "2026-06-28", "exposures": 2, "active_output": 2, "scenes": ["赴日打工", "咖啡厅"], "connections": ["kara"], "mastery": 3, "due": "2026-07-05", "notes": "本次'何か飲みたいので'用对。★坑:たい/い形容词后不加だ→飲みたいので○(原误飲みたいだから);名词・な形容词才垫だ(学生だから)" },
-    { "id": "kara", "type": "grammar", "jp": "〜から", "kana": "", "gloss": "因为……（主观、口语）", "example": "お金を稼ぎたいから、日本へ来ました。", "first_seen": "2026-06-24", "last_seen": "2026-06-28", "exposures": 4, "active_output": 2, "scenes": ["赴日打工", "亏不亏分析", "咖啡厅"], "connections": ["node", "kasegu", "karatoiitte"], "mastery": 2, "due": "2026-07-01", "notes": "本次误'飲みたいだから'(い形/たい不加だ)→应飲みたいから/ので,已纠。与ので对比:から主观口语" },
-    { "id": "demo", "type": "grammar", "jp": "でも", "kana": "", "gloss": "但是（转折，句首）", "example": "残るかもしれない。でも、帰りたい。", "first_seen": "2026-06-24", "last_seen": "2026-06-28", "exposures": 3, "active_output": 2, "scenes": ["赴日打工", "咖啡厅"], "connections": ["noni"], "mastery": 3, "due": "2026-07-05", "notes": "本次'でも、少し高いですね'主动用对。与のに区别:でも中性另起,のに自带情绪" },
-    { "id": "totemo", "type": "word", "jp": "とても", "kana": "", "gloss": "很 / 非常", "example": "とても帰りたいです。", "first_seen": "2026-06-24", "last_seen": "2026-06-28", "exposures": 2, "active_output": 2, "scenes": ["赴日打工", "咖啡厅"], "connections": [], "mastery": 3, "due": "2026-07-05", "notes": "本次'とてもおいしい'用对" },
-    { "id": "yappari", "type": "word", "jp": "やっぱり", "kana": "", "gloss": "果然 / 还是", "example": "やっぱり残りたい。", "first_seen": "2026-06-24", "last_seen": "2026-06-28", "exposures": 2, "active_output": 2, "scenes": ["赴日打工", "咖啡厅"], "connections": [], "mastery": 2, "due": "2026-07-01", "notes": "本次'还是'卡壳(说成中文),给提示后'やっぱり家に帰りたい'用对。需提示才想起,继续练" },
-    { "id": "ne-particle", "type": "grammar", "jp": "ね", "kana": "", "gloss": "句尾软化/寻求共鸣（……啊/……呢）", "example": "残りたいですね。", "first_seen": "2026-06-24", "last_seen": "2026-06-28", "exposures": 2, "active_output": 2, "scenes": ["赴日打工", "咖啡厅"], "connections": [], "mastery": 3, "due": "2026-07-05", "notes": "本次'おいしいですね/高いですね'多次自然添加" },
-    { "id": "hataraku", "type": "word", "jp": "働く", "kana": "はたらく", "gloss": "工作/劳动（动作，配で）", "example": "会社で働く人が多い。", "first_seen": "2026-06-24", "last_seen": "2026-06-30", "exposures": 5, "active_output": 3, "scenes": ["赴日打工", "通勤/NHK电车新闻", "阅读·自炊"], "connections": ["de-particle", "shigoto", "tsutomeru"], "mastery": 4, "due": "2026-07-16", "notes": "与 仕事(名词)、勤める(归属) 区分。NHK阅读里第2个场景(通勤)复现，达2场景；差1次主动输出即掌握" },
-    { "id": "kasegu", "type": "word", "jp": "稼ぐ", "kana": "かせぐ", "gloss": "挣钱", "example": "お金を稼ぐ。", "first_seen": "2026-06-24", "last_seen": "2026-06-26", "exposures": 3, "active_output": 2, "scenes": ["赴日打工", "亏不亏分析"], "connections": ["de-particle", "kara", "kanoukei"], "mastery": 3, "due": "2026-07-03", "notes": "用户主动用对多次：稼ぎたい/稼いだ/稼げなかった。本次'稼げなかった'再用对" },
-    { "id": "sumu", "type": "word", "jp": "住む", "kana": "すむ", "gloss": "居住（状态，配に）", "example": "日本に住む。", "first_seen": "2026-06-24", "last_seen": "2026-06-24", "exposures": 3, "active_output": 2, "scenes": ["赴日打工"], "connections": ["ni-particle", "yasui"], "mastery": 3, "due": "2026-07-01", "notes": "看似动作却用に，因表长期存在" },
-    { "id": "kaeru", "type": "word", "jp": "帰る", "kana": "かえる", "gloss": "回去/回国（往外走）", "example": "中国に帰る。", "first_seen": "2026-06-24", "last_seen": "2026-06-28", "exposures": 5, "active_output": 4, "scenes": ["赴日打工", "亏不亏/本当は帰りたい", "咖啡厅"], "connections": ["nokoru", "ni-particle", "tai", "hontouwa"], "mastery": 4, "due": "2026-07-14", "notes": "★已掌握。易与残る贴反；钩子=帰国往外走。本次'家に帰りたいかもしれない'用对。★伪装一段的五段:可能形帰れる(不带ら)" },
-    { "id": "nokoru", "type": "word", "jp": "残る", "kana": "のこる", "gloss": "留下/残留（留原地）", "example": "日本に残る。", "first_seen": "2026-06-24", "last_seen": "2026-06-24", "exposures": 3, "active_output": 2, "scenes": ["赴日打工"], "connections": ["kaeru", "ni-particle"], "mastery": 3, "due": "2026-07-01", "notes": "★易与帰る贴反；钩子=残留留原地。本次主动用对'日本に残っている'(还会ている持续态)" },
-    { "id": "iku", "type": "word", "jp": "行く", "kana": "いく", "gloss": "去（落点配に）", "example": "コンビニに行きます。", "first_seen": "2026-06-24", "last_seen": "2026-06-28", "exposures": 4, "active_output": 2, "scenes": ["赴日打工", "便利店", "咖啡厅"], "connections": ["ni-particle", "mashou"], "mastery": 3, "due": "2026-07-05", "notes": "本次'コンビニに行きましょう'主动用对(に+ましょう都对)" },
-    { "id": "tsutomeru", "type": "word", "jp": "勤める", "kana": "つとめる", "gloss": "任职于（公司，配に，表归属）", "example": "日本の会社に勤める。", "first_seen": "2026-06-24", "last_seen": "2026-06-30", "exposures": 3, "active_output": 2, "scenes": ["赴日打工", "同乡故事", "双轨复验"], "connections": ["ni-particle", "hataraku", "sumu", "teiru"], "mastery": 3, "due": "2026-07-07", "notes": "首次主动用对'東京の会社に勤めています'(に+动词选择都对)。钩子=働く干活(で)/勤める属于(に)，に与住む同家。ている误加っ(勤めっ→勤め)：一段动词去る加て不变音，待巩固" },
-    { "id": "hontouwa", "type": "word", "jp": "本当は", "kana": "ほんとうは", "gloss": "其实（本当+は，话锋一转）", "example": "本当は帰りたい。", "first_seen": "2026-06-24", "last_seen": "2026-06-30", "exposures": 3, "active_output": 2, "scenes": ["赴日打工", "同乡故事", "双轨复验"], "connections": ["totemo", "kaeru", "wa-contrast"], "mastery": 3, "due": "2026-07-07", "notes": "正式拆开。首次漏は(本当→本当は)，纠正后'彼は本当は国に帰りたい'用对。钩子=本当(真的)+は转折→其实；は与'損だとは'同一对比味" },
-    { "id": "son", "type": "word", "jp": "損", "kana": "そん", "gloss": "亏/吃亏（損だ/損する）", "example": "稼げなかったから、損だと思う。", "first_seen": "2026-06-24", "last_seen": "2026-06-30", "exposures": 3, "active_output": 2, "scenes": ["赴日打工", "买房亏不亏", "外食自炊"], "connections": ["kasegu", "to-omou", "karatoiitte"], "mastery": 3, "due": "2026-07-07", "notes": "读音そん拿下(汉字'損'=损失)。多次用对'損だと思います'/'損だとは限らない'。形容词式損だ/动词式損する" },
-    { "id": "kanoukei", "type": "concept", "jp": "可能形", "kana": "かのうけい", "gloss": "能不能做：五段 う段→え段+る（稼ぐ→稼げる）；一段 去る+られる（食べる→食べられる）；不规则 する→できる、来る→来られる；另:动词原形+ことができる 等价", "example": "確認できます。/ 読むことができる。", "first_seen": "2026-06-24", "last_seen": "2026-06-26", "exposures": 4, "active_output": 4, "scenes": ["赴日打工", "可能形造句", "ATM新闻/確認できる"], "connections": ["kasegu", "ga-particle", "tari", "kakunin"], "mastery": 5, "due": "2026-07-31", "notes": "★彻底通关:规则(五段/一段)+两个刺头(する→できる、来る→来られる)+ことができる三件套全齐。でき=できる词干。★坑:帰る/入る/要る/走る/知る是伪装成一段的五段,可能形不带ら(帰れる不是帰られる)" },
-    { "id": "karatoiitte", "type": "grammar", "jp": "〜からといって", "kana": "", "gloss": "不能因为…就…/虽说…（N2 10.2 因果与逻辑）", "example": "日本に来たからといって、お金を稼げるとは限らない。", "first_seen": "2026-06-24", "last_seen": "2026-06-30", "exposures": 3, "active_output": 2, "scenes": ["赴日打工", "买房亏不亏", "外食自炊"], "connections": ["kara", "tohakagiranai", "son"], "mastery": 3, "due": "2026-07-07", "notes": "N2 10.2。06-30'外食は高いからといって、損だとは限らない'再次主动用对(三语法连用)。常配'〜とは限らない'" },
-    { "id": "teiru", "type": "grammar", "jp": "〜ている", "kana": "", "gloss": "动作/状态持续（残っている=一直留着、混んでいる=一直挤着、飲んでいます=正在喝）", "example": "コーヒーを飲んでいます。", "first_seen": "2026-06-24", "last_seen": "2026-06-24", "exposures": 3, "active_output": 1, "scenes": ["赴日打工/残る", "NHK电车新闻", "飲む造句"], "connections": ["nokoru", "teform", "nomu"], "mastery": 3, "due": "2026-07-01", "notes": "用户自己提问驱动(高保留)。两半=て形+いる。首次主动输出'コーヒーを飲んでいます'(还自带ています礼貌体)正确。て形音便(む/ぶ/ぬ→んで; る/つ/う→って)待系统拆" },
-    { "id": "daijoubu", "type": "word", "jp": "大丈夫です", "kana": "だいじょうぶです", "gloss": "不用了/没关系（万能婉拒神器）", "example": "袋は大丈夫です。", "first_seen": "2026-06-25", "last_seen": "2026-06-28", "exposures": 4, "active_output": 3, "scenes": ["便利店", "咖啡厅"], "connections": ["onegaishimasu"], "mastery": 4, "due": "2026-07-14", "notes": "★已掌握(mastery4/active3/scenes2)。婉拒一切：不要袋子/勺子/帮忙都用。与 お願いします 配成一对。本次咖啡厅再用对" },
-    { "id": "onegaishimasu", "type": "word", "jp": "お願いします", "kana": "おねがいします", "gloss": "麻烦了/拜托了（万能接受神器）", "example": "現金で、お願いします。", "first_seen": "2026-06-25", "last_seen": "2026-06-28", "exposures": 3, "active_output": 2, "scenes": ["便利店", "咖啡厅"], "connections": ["daijoubu"], "mastery": 3, "due": "2026-07-05", "notes": "接受/拜托。与 大丈夫です(婉拒) 配对。本次'これお願いします/現金でお願いします'用对" },
-    { "id": "tekudasai", "type": "grammar", "jp": "〜てください", "kana": "", "gloss": "请（你）做……（て形+ください）", "example": "温めてください。", "first_seen": "2026-06-25", "last_seen": "2026-06-28", "exposures": 2, "active_output": 2, "scenes": ["便利店", "咖啡厅"], "connections": ["teiru", "teform", "atatameru"], "mastery": 3, "due": "2026-07-05", "notes": "本次'温めてください'再次主动用对。与をください(给某物)对照" },
-    { "id": "konbini", "type": "word", "jp": "コンビニ", "kana": "", "gloss": "便利店（convenience store）", "example": "コンビニに行きます。", "first_seen": "2026-06-25", "last_seen": "2026-06-28", "exposures": 3, "active_output": 2, "scenes": ["便利店", "咖啡厅"], "connections": ["iku"], "mastery": 3, "due": "2026-07-05", "notes": "外来语。本次'コンビニに行きましょう'用对" },
-    { "id": "atatameru", "type": "word", "jp": "温める", "kana": "あたためる", "gloss": "加热（便当微波）", "example": "温めてください。", "first_seen": "2026-06-25", "last_seen": "2026-06-28", "exposures": 3, "active_output": 2, "scenes": ["便利店", "咖啡厅"], "connections": ["tekudasai"], "mastery": 3, "due": "2026-07-05", "notes": "店员台词'温めますか'；本次'温めてください'再用对" },
-    { "id": "genkin", "type": "word", "jp": "現金", "kana": "げんきん", "gloss": "现金", "example": "現金で、お願いします。", "first_seen": "2026-06-25", "last_seen": "2026-06-28", "exposures": 2, "active_output": 2, "scenes": ["便利店", "咖啡厅"], "connections": ["de-particle"], "mastery": 3, "due": "2026-07-05", "notes": "配 で 表手段：現金で(用现金)。本次再用对" },
-    { "id": "keigo-houkou", "type": "concept", "jp": "敬语方向（お〜）", "kana": "", "gloss": "两种お：①お+动词连用形+です/になる=尊敬(指对方,自己摘掉)；②お+名词=美化(自己也能用)", "example": "お持ちですか(尊敬)→自己说持っていません；お会計(美化)自己也用", "first_seen": "2026-06-25", "last_seen": "2026-06-26", "exposures": 2, "active_output": 1, "scenes": ["便利店", "敬语判断"], "connections": ["daijoubu", "kaikei"], "mastery": 3, "due": "2026-07-03", "notes": "★坑已填平。用户真问题是'认不出お是粘的还是词本身'。尺子=去掉お剩动词零件(持ち/帰り)→尊敬别自用；剩独立名词(会計/茶/願い)→美化能自用。三连判断全对并能讲出依据" },
-    { "id": "iru-need", "type": "word", "jp": "要る", "kana": "いる", "gloss": "需要（要不要的'要'；要的东西配 が/は）", "example": "レジ袋は要りません。", "first_seen": "2026-06-25", "last_seen": "2026-06-28", "exposures": 2, "active_output": 2, "scenes": ["便利店", "咖啡厅"], "connections": ["okudasai", "kanoukei"], "mastery": 2, "due": "2026-07-01", "notes": "★今日再踩两坑:①误用を(要る要的东西配が/は,婉拒用は)②误活用'いるない'——要る是伪装一段的五段→否定要らない(いらない)/要りません(いりません),多个ら/り。均已纠,需继续watch。汉字'要'=要不要的要。与居る(在)同音いる靠场景分" },
-    { "id": "okudasai", "type": "grammar", "jp": "〜をください", "kana": "", "gloss": "请给我（名词）+を+ください", "example": "袋を一つください。/ これをください。", "first_seen": "2026-06-25", "last_seen": "2026-06-28", "exposures": 3, "active_output": 2, "scenes": ["便利店", "咖啡厅"], "connections": ["tekudasai", "kore"], "mastery": 2, "due": "2026-07-01", "notes": "与 てください(动词て+请做) 对照：をください=请给某物。本次用'これください、お願いします'(口语省を且与お願いします冗余)→正式选一个:これをください 或 これ、お願いします" },
-    { "id": "kaikei", "type": "word", "jp": "お会計", "kana": "おかいけい", "gloss": "结账/买单（吃喝后清算用；配 お願いします）", "example": "お会計をお願いします。", "first_seen": "2026-06-25", "last_seen": "2026-06-30", "exposures": 3, "active_output": 2, "scenes": ["便利店/餐厅", "敬语判断", "双轨复验"], "connections": ["onegaishimasu", "keigo-houkou"], "mastery": 3, "due": "2026-07-07", "notes": "饭店买单最对口；零售用これお願いします。本次判断对:お会計的お是'美化'(会計是独立名词),自己也能用。居酒屋也说お勘定" },
-    { "id": "kore", "type": "word", "jp": "これ", "kana": "", "gloss": "这个（单独代词，后面不接名词；对比 この+名词）", "example": "これをください。/ このコーヒー。", "first_seen": "2026-06-25", "last_seen": "2026-06-29", "exposures": 3, "active_output": 2, "scenes": ["便利店", "咖啡厅", "N5覆盖·食物饮品"], "connections": ["okudasai", "kono", "aji"], "mastery": 3, "due": "2026-07-06", "notes": "★これ vs この(N5头号易混):これ自己站(后不接名词);この要扶名词(このコーヒー/この店)。★第2次复发(06-28 これコーヒー / 06-29 これ味)→均纠为この。顽固易混点,需持续盯到不再错" },
-    { "id": "rejibukuro", "type": "word", "jp": "レジ袋", "kana": "レジぶくろ", "gloss": "购物袋/收银塑料袋", "example": "レジ袋は要りません。", "first_seen": "2026-06-25", "last_seen": "2026-06-28", "exposures": 2, "active_output": 1, "scenes": ["便利店", "咖啡厅"], "connections": ["iru-need"], "mastery": 2, "due": "2026-07-01", "notes": "★末尾误说'レジ'(=收银台)漏了袋→レジ袋才是袋子,别丢袋。已纠" },
-    { "id": "sumimasen", "type": "word", "jp": "すみません", "kana": "", "gloss": "万能：道歉/道谢/叫人(引起注意)", "example": "すみません、お会計をお願いします。", "first_seen": "2026-06-25", "last_seen": "2026-06-25", "exposures": 2, "active_output": 2, "scenes": ["便利店"], "connections": [], "mastery": 3, "due": "2026-07-02", "notes": "店员不在时拖长音'すみませーん'召唤" },
-    { "id": "to-omou", "type": "grammar", "jp": "〜と思う", "kana": "とおもう", "gloss": "我觉得/我认为（と=引号助词，把想法打包交给思う）", "example": "損だと思います。", "first_seen": "2026-06-26", "last_seen": "2026-06-30", "exposures": 2, "active_output": 2, "scenes": ["买房亏不亏", "外食自炊"], "connections": ["son", "tohakagiranai"], "mastery": 3, "active_output_note": "用户最想要的'我觉得'表达。首次纠正后用对'損だと思います'(原误:损だ思うています→漏と+多ています)。钩子=と是思う前的引号；想法直接用思います不加ています", "mastery_was": "教学门槛日:挣扎项满,本项是纠错中自然带出,非主动新增", "notes": "★高频表达观点(★★★★★)。「○○」と思う。注意:と不可省;'觉得'用朴素思います。06-30'自炊のほうが安いと思います'再用对(配のほうが比较)", "due": "2026-07-07" },
-    { "id": "tohakagiranai", "type": "grammar", "jp": "〜とは限らない", "kana": "とはかぎらない", "gloss": "未必/不一定（限る=かぎる限定，否定→不限于此）", "example": "高いからといって、損だとは限らない。", "first_seen": "2026-06-26", "last_seen": "2026-06-30", "exposures": 2, "active_output": 2, "scenes": ["买房亏不亏", "外食自炊"], "connections": ["karatoiitte", "to-omou", "son"], "mastery": 3, "due": "2026-07-07", "notes": "N2 10.6 推断与判断。常与からといって搭。06-30'損だとは限らない'再用对。限らない读かぎらない。と+は强调对比" },
-    { "id": "noni", "type": "grammar", "jp": "〜のに", "kana": "", "gloss": "明明…却…（逆接，带意外/不满/惋惜的情绪；接普通形）", "example": "給料が上がったのに、貯金できない。", "first_seen": "2026-06-26", "last_seen": "2026-06-26", "exposures": 3, "active_output": 2, "scenes": ["工资攒不下", "同乡想回回不去"], "connections": ["demo", "tsutomeru", "hontouwa", "kaeru"], "mastery": 3, "due": "2026-07-03", "notes": "★定级断层N3已补(N3 9.3)。首日3句2场景主动用对。与でも区别:のに自带情绪(不满/可惜)黏前句屁股,でも中性另起。接普通形(上がった/勤めている+のに)" },
-    { "id": "tari", "type": "grammar", "jp": "〜たり〜たり", "kana": "", "gloss": "又…又…（列举代表动作；动词た形+り，最后收する）", "example": "お弁当を買ったり、お金を出したりします。", "first_seen": "2026-06-26", "last_seen": "2026-06-30", "exposures": 3, "active_output": 2, "scenes": ["便利店/ATM", "外食自炊"], "connections": ["kanoukei", "de-particle"], "mastery": 3, "due": "2026-07-07", "notes": "N3 9.11。★たり接た形(研究したり/作ったり/買ったり),06-30先误辞書形+たり(研究するたり)纠正后用对。时态只压句尾する。最后收します" },
-    { "id": "kakunin", "type": "word", "jp": "確認", "kana": "かくにん", "gloss": "确认（確認する/できる）", "example": "在留カードで本人を確認できます。", "first_seen": "2026-06-26", "last_seen": "2026-06-30", "exposures": 3, "active_output": 2, "scenes": ["NHK ATM新闻", "双轨复验"], "connections": ["kanoukei", "de-particle"], "mastery": 3, "due": "2026-07-07", "notes": "阅读捞出。用户主动用对'確認できます'(する→できる)" },
-    { "id": "nitotte", "type": "grammar", "jp": "〜にとって", "kana": "", "gloss": "对…来说/站在…的角度（名词+にとって，后接判断评价）", "example": "私にとって、貯金は難しいです。", "first_seen": "2026-06-26", "last_seen": "2026-06-30", "exposures": 3, "active_output": 3, "scenes": ["外国人买房难", "我·攒钱难", "外食自炊"], "connections": ["ni-particle", "nitsuite", "nominalize"], "mastery": 4, "due": "2026-07-16", "notes": "★已掌握(N3 9.12,mastery4/active3/scenes3)。06-30'今の私にとって、自炊は難しいです'用对。に+とって=拿…来看,后接评价。与について区别:にとって看视角,について圈话题" },
-    { "id": "nitsuite", "type": "grammar", "jp": "〜について", "kana": "", "gloss": "关于…（名词/こと+について，后接言说思考类:話す/考える/書く）", "example": "家を買うことについて、よく考えます。", "first_seen": "2026-06-26", "last_seen": "2026-06-30", "exposures": 2, "active_output": 2, "scenes": ["买房·思考", "双轨复验"], "connections": ["nitotte", "nominalize", "kangaeru"], "mastery": 3, "due": "2026-07-07", "notes": "N3 9.12。について圈话题(后接说/想/写)。★前面动词要用こと打包:買うことについて(不是買うのについて)。与にとって(视角)配对" },
-    { "id": "nominalize", "type": "concept", "jp": "名词化 の/こと", "kana": "", "gloss": "把动词变名词的两个工具:の接は/が/だ;こと接について等词组助词;名词本身不用打包", "example": "買うのは難しい / 買うことについて考える", "first_seen": "2026-06-26", "last_seen": "2026-06-30", "exposures": 4, "active_output": 2, "scenes": ["买房分析", "双轨复验"], "connections": ["nitsuite", "nitotte"], "mastery": 3, "due": "2026-07-07", "notes": "★今日3次易错:①の+こと叠用(買うのこと✗)②给名词加の(貯金のは✗,貯金已是名词直接は)③について前用の(買うのについて✗→買うこと)。规律:の后跟光杆は/が;こと后跟词组助词;名词不打包。需继续watch" },
-    { "id": "kangaeru", "type": "word", "jp": "考える", "kana": "かんがえる", "gloss": "思考/考虑（一段动词）", "example": "家を買うことについて、よく考えます。", "first_seen": "2026-06-26", "last_seen": "2026-06-30", "exposures": 2, "active_output": 2, "scenes": ["买房·思考", "双轨复验"], "connections": ["nitsuite"], "mastery": 3, "due": "2026-07-07", "notes": "用户主动用对'よく考えます'。一段动词(考え+る)。贴用户'爱分析琢磨'的高频词" },
-    { "id": "mashou", "type": "grammar", "jp": "〜ましょう", "kana": "", "gloss": "（一起）…吧 / 我们…吧（連用形+ましょう，邀请/提议）", "example": "コンビニに行きましょう。/ 帰りましょう。", "first_seen": "2026-06-28", "last_seen": "2026-06-28", "exposures": 3, "active_output": 1, "scenes": ["咖啡厅"], "connections": ["renyoukei", "iku"], "mastery": 2, "due": "2026-07-01", "notes": "N5新增。一次就对'コンビニに行きましょう'。连用形(行き/帰り/飲み)+ましょう=邀请。比ましょうか更直接" },
-    { "id": "nanika", "type": "word", "jp": "何か", "kana": "なにか", "gloss": "某样东西/点什么（か=不确定）", "example": "何か飲みたい。", "first_seen": "2026-06-28", "last_seen": "2026-06-29", "exposures": 3, "active_output": 1, "scenes": ["咖啡厅", "形容词造句"], "connections": ["nominalize"], "mastery": 2, "due": "2026-07-02", "notes": "★易混:何か(某/点什么,か无浊点) vs 何を(疑问) vs 何が(主语)。06-29'何か冷たいもの'结构里何か用对(差もの已纠)→脱离挣扎。か=不确定(誰か/どこか同理)" },
-    { "id": "sukoshi", "type": "word", "jp": "少し", "kana": "すこし", "gloss": "一点/稍微（比 ちょっと 略正式）", "example": "少し高いです。", "first_seen": "2026-06-28", "last_seen": "2026-06-28", "exposures": 1, "active_output": 1, "scenes": ["咖啡厅"], "connections": [], "mastery": 2, "due": "2026-07-01", "notes": "N5新增。用户主动用对'少し高いです'。与ちょっと(更口语)同义,少し略书面/礼貌" },
-    { "id": "sou-kansetsu", "type": "concept", "jp": "そう（间接标记）", "kana": "", "gloss": "そう='间接'专用:様態おいしそう(看起来,去い)/伝聞おいしいそうだ(听说);亲身经历直接说おいしいです,别加そう", "example": "おいしそう(看起来好吃) / おいしいそうだ(听说好吃) / 〔正在吃〕おいしいです", "first_seen": "2026-06-28", "last_seen": "2026-06-28", "exposures": 3, "active_output": 1, "scenes": ["咖啡厅", "形容词造句", "そう专练"], "connections": [], "mastery": 2, "due": "2026-07-03", "notes": "★06-30对照专练4/4全对→攻破。规律:様態=去い+そう(おいしそう/面白そう,看起来/眼前);伝聞=普通形+そうだ(おいしいそうだ/帰るそうだ,听说)。对照format破坑;曾06-28/06-29连错。继续盯巩固" },
-    { "id": "shokuji", "type": "word", "jp": "食事", "kana": "しょくじ", "gloss": "用餐/餐（食事をする/取る）", "example": "食事を取る。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·食物饮品"], "connections": [], "mastery": 2, "due": "2026-07-02", "notes": "N5覆盖缺口。用户绕成'ご飯を食べるの',正式名词=食事。サ变:食事する。同日造句'食事をしました'主动用对" },
-    { "id": "oyu", "type": "word", "jp": "お湯", "kana": "おゆ", "gloss": "热水/开水", "example": "お湯を沸かす。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·食物饮品"], "connections": ["mizu"], "mastery": 2, "due": "2026-07-02", "notes": "★对比 水(みず)=凉水:日语 お湯=热的、水=冷的,分得清。'お湯をください'用对(先漏を已纠)" },
-    { "id": "shouyu", "type": "word", "jp": "醤油", "kana": "しょうゆ", "gloss": "酱油", "example": "醤油をかける。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·食物饮品"], "connections": [], "mastery": 2, "due": "2026-07-02", "notes": "N5覆盖缺口。读 しょうゆ(长音)。'醤油をかけてください'用对(带て形)" },
-    { "id": "mikan", "type": "word", "jp": "みかん", "kana": "みかん", "gloss": "蜜橘/橘子", "example": "みかんは甘い。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·食物饮品"], "connections": [], "mastery": 2, "due": "2026-07-02", "notes": "★用户说成 オレンジ(西式橙);日本日常蜜橘=みかん。'みかんはとても甘いです'用对" },
-    { "id": "budou", "type": "word", "jp": "ぶどう", "kana": "ぶどう", "gloss": "葡萄", "example": "ぶどうを食べる。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·食物饮品"], "connections": ["wain"], "mastery": 2, "due": "2026-07-02", "notes": "N5覆盖缺口。ワイン=ぶどう酒可联想。'いちごとぶどうが好き'用对(写汉字葡萄,日常用假名ぶどう)" },
-    { "id": "ichigo", "type": "word", "jp": "いちご", "kana": "いちご", "gloss": "草莓", "example": "いちごのケーキ。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·食物饮品"], "connections": ["keeki"], "mastery": 2, "due": "2026-07-02", "notes": "N5覆盖缺口。'いちごとぶどうが好き'用对" },
-    { "id": "ame", "type": "word", "jp": "飴", "kana": "あめ", "gloss": "糖果（含化的糖）", "example": "飴を舐める。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·食物饮品"], "connections": ["okashi", "satou"], "mastery": 2, "due": "2026-07-02", "notes": "★三个'糖'区分:飴(あめ)=含化糖果/お菓子=点心总称/砂糖(さとう)=做菜的糖。'弟は飴を食べています'用对(带ている)" },
-    { "id": "juice", "type": "word", "jp": "ジュース", "kana": "ジュース", "gloss": "果汁/饮料", "example": "ジュースを買う。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·食物饮品"], "connections": ["katakana-form"], "mastery": 2, "due": "2026-07-02", "notes": "N5覆盖缺口(片假名)。'ジュースを飲みたい'用对" },
-    { "id": "aji", "type": "word", "jp": "味", "kana": "あじ", "gloss": "味道", "example": "味が薄い。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·食物饮品"], "connections": ["kore"], "mastery": 2, "due": "2026-07-02", "notes": "N5覆盖缺口。味が薄い/濃い。'この味は少し薄い'用对。★再踩これ→この(误これ味)已纠,见kore" },
-    { "id": "keeki", "type": "word", "jp": "ケーキ", "kana": "ケーキ", "gloss": "蛋糕", "example": "ケーキを切る。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·食物饮品"], "connections": ["katakana-form", "ichigo"], "mastery": 2, "due": "2026-07-02", "notes": "★片假名形错:首次说成 カーキ(卡其色)。ケーキ=ke-ki。同日'このケーキは甘いですね'用对,ケーキ写对未再カーキ" },
-    { "id": "aisukuriimu", "type": "word", "jp": "アイスクリーム", "kana": "アイスクリーム", "gloss": "冰淇淋（口语略 アイス）", "example": "アイスクリームを食べる。", "first_seen": "2026-06-29", "last_seen": "2026-06-30", "exposures": 3, "active_output": 1, "scenes": ["N5覆盖·食物饮品", "片假名听写"], "connections": ["katakana-form"], "mastery": 2, "due": "2026-07-03", "notes": "★曾错3种(スクリーム/アイスリーム/アイスクレーム)。06-30片假名听写一次写对アイスクリーム→脱离挣扎。死记 アイス(ice)+クリーム(cream)。听写format比造句有效" },
-    { "id": "koppu", "type": "word", "jp": "コップ", "kana": "コップ", "gloss": "玻璃杯（无把手）", "example": "コップに水を入れる。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·食物饮品"], "connections": ["katakana-form"], "mastery": 2, "due": "2026-07-02", "notes": "★片假名形错:首次说成 カープ(鲤鱼/广岛队)。コップ(荷兰語kop)=无把手玻璃杯;カップ=带把咖啡杯。'コップに水を入れる'用对(先漏动词入れる已纠)" },
-    { "id": "katakana-form", "type": "concept", "jp": "片假名外来词的形", "kana": "", "gloss": "听得懂但说不准片假名的'形'(长音/拨音/拗音):ラーメン(非ラーメ)、ケーキ(非カーキ)、アイスクリーム(非スクリーム)、コップ(非カープ)", "example": "ケーキ○/カーキ✗(卡其) ; コップ○/カープ✗(鲤鱼)", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 4, "active_output": 1, "scenes": ["N5覆盖·食物饮品", "形容词造句", "片假名听写"], "connections": ["keeki", "koppu", "aisukuriimu", "juice"], "mastery": 2, "due": "2026-07-03", "notes": "★元模式:外来词意思懂但片假名形念歪(カーキ/スクリーム/カープ)。06-30片假名听写6/6全对(アイスクリーム/コーヒー/ジュース/スプーン/ビール/ケーキ)→听写format有效,优于造句。继续定期听写巩固" },
-    { "id": "amai", "type": "word", "jp": "甘い", "kana": "あまい", "gloss": "甜（い形容词）", "example": "このケーキは甘いです。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 3, "active_output": 2, "scenes": ["N5覆盖·食物饮品", "N5覆盖·形容词"], "connections": ["karai", "nigai"], "mastery": 2, "due": "2026-07-02", "notes": "形容词覆盖。多次主动用对(甘いですね/とても甘いです)。味觉组:甘い/辛い/苦い/酸っぱい" },
-    { "id": "isogashii", "type": "word", "jp": "忙しい", "kana": "いそがしい", "gloss": "忙（い形容词）", "example": "今日は忙しいです。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·形容词"], "connections": [], "mastery": 2, "due": "2026-07-02", "notes": "形容词覆盖。recall时未答出,造句'今日は忙しいです'主动用对" },
-    { "id": "tsumetai", "type": "word", "jp": "冷たい", "kana": "つめたい", "gloss": "凉/冰（触感；い形容词）", "example": "水が冷たい。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·形容词"], "connections": ["suzushii", "atsui-hot"], "mastery": 2, "due": "2026-07-02", "notes": "★温度组:冷たい(触感冰,水/手)vs 涼しい(天气凉爽舒服)。用户首写すめたい(应つめたい),造句'何か冷たいもの'冷たい用对(差もの已纠)" },
-    { "id": "warui", "type": "word", "jp": "悪い", "kana": "わるい", "gloss": "坏（い形）", "example": "悪い人。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·形容词"], "connections": ["ii"], "mastery": 2, "due": "2026-07-02", "notes": "形容词反复练通关。↔いい" },
-    { "id": "hikui", "type": "word", "jp": "低い", "kana": "ひくい", "gloss": "低（い形）", "example": "声が低い。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·形容词"], "connections": ["takai"], "mastery": 2, "due": "2026-07-02", "notes": "★高い反义:高度↔低い;价钱↔安い。曾误用安い答'低'" },
-    { "id": "nagai", "type": "word", "jp": "長い", "kana": "ながい", "gloss": "长（い形）", "example": "髪が長い。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·形容词"], "connections": ["mijikai"], "mastery": 2, "due": "2026-07-02", "notes": "形容词反复练通关。↔短い" },
-    { "id": "mijikai", "type": "word", "jp": "短い", "kana": "みじかい", "gloss": "短（い形）", "example": "短い手紙。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·形容词"], "connections": ["nagai"], "mastery": 2, "due": "2026-07-02", "notes": "形容词反复练通关。读法みじかい确认" },
-    { "id": "ooi", "type": "word", "jp": "多い", "kana": "おおい", "gloss": "多（い形）", "example": "人が多い。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·形容词"], "connections": ["sukunai"], "mastery": 2, "due": "2026-07-02", "notes": "形容词反复练通关。↔少ない" },
-    { "id": "sukunai", "type": "word", "jp": "少ない", "kana": "すくない", "gloss": "少（い形）", "example": "雨が少ない。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·形容词"], "connections": ["ooi", "sukoshi"], "mastery": 2, "due": "2026-07-02", "notes": "★≠少し(すこし副词'稍微')!少ない=形容词'少的'(人が少ない)。曾混用" },
-    { "id": "osoi", "type": "word", "jp": "遅い", "kana": "おそい", "gloss": "慢/晚（い形）", "example": "遅い時間。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·形容词"], "connections": ["hayai"], "mastery": 2, "due": "2026-07-02", "notes": "慢也=晚。↔速い(快)。读法おそい确认" },
-    { "id": "semai", "type": "word", "jp": "狭い", "kana": "せまい", "gloss": "窄（い形）", "example": "狭い道。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·形容词"], "connections": ["hiroi"], "mastery": 2, "due": "2026-07-02", "notes": "↔広い。读法せまい确认" },
-    { "id": "akarui", "type": "word", "jp": "明るい", "kana": "あかるい", "gloss": "明亮（い形）", "example": "明るい部屋。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·形容词"], "connections": ["kurai"], "mastery": 2, "due": "2026-07-02", "notes": "↔暗い" },
-    { "id": "kurai", "type": "word", "jp": "暗い", "kana": "くらい", "gloss": "暗（い形）", "example": "暗い道。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·形容词"], "connections": ["akarui"], "mastery": 2, "due": "2026-07-02", "notes": "↔明るい。同音くらい=程度助词(これくらい)靠语境分" },
-    { "id": "futoi", "type": "word", "jp": "太い", "kana": "ふとい", "gloss": "粗（い形）", "example": "太い線。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·形容词"], "connections": ["hosoi"], "mastery": 2, "due": "2026-07-02", "notes": "↔細い" },
-    { "id": "hosoi", "type": "word", "jp": "細い", "kana": "ほそい", "gloss": "细（い形）", "example": "細い道。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·形容词"], "connections": ["futoi"], "mastery": 2, "due": "2026-07-02", "notes": "↔太い" },
-    { "id": "omoi", "type": "word", "jp": "重い", "kana": "おもい", "gloss": "重（い形）", "example": "重い鞄。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·形容词"], "connections": ["karui"], "mastery": 2, "due": "2026-07-02", "notes": "↔軽い" },
-    { "id": "tsuyoi", "type": "word", "jp": "強い", "kana": "つよい", "gloss": "强（い形）", "example": "強い風。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·形容词"], "connections": ["yowai"], "mastery": 2, "due": "2026-07-02", "notes": "↔弱い" },
-    { "id": "yasashii-easy", "type": "word", "jp": "易しい", "kana": "やさしい", "gloss": "容易（い形）", "example": "易しい問題。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·形容词"], "connections": ["muzukashii", "yasashii-kind"], "mastery": 2, "due": "2026-07-02", "notes": "★同音不同字:易しい(容易)/優しい(やさしい温柔)。曾混。↔難しい" },
-    { "id": "atsui-hot", "type": "word", "jp": "熱い", "kana": "あつい", "gloss": "烫（物体；い形）", "example": "お茶が熱い。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·形容词"], "connections": ["atsui-weather", "atsui-thick", "tsumetai"], "mastery": 2, "due": "2026-07-02", "notes": "★三あつい:暑い(天热)/熱い(物烫,茶/湯)/厚い(厚)。熱い↔冷たい" },
-    { "id": "suzushii", "type": "word", "jp": "涼しい", "kana": "すずしい", "gloss": "凉爽（天气舒服；い形）", "example": "風が涼しい。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·形容词"], "connections": ["tsumetai", "atatakai"], "mastery": 2, "due": "2026-07-02", "notes": "★涼しい(天气凉爽,舒服)vs冷たい(触感冰)。↔暖かい" },
-    { "id": "karai", "type": "word", "jp": "辛い", "kana": "からい", "gloss": "辣（い形）", "example": "辛いカレー。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·形容词"], "connections": ["amai", "nigai"], "mastery": 2, "due": "2026-07-02", "notes": "★同字异读:辛い=からい(辣)/つらい(辛苦难受),看语境" },
-    { "id": "nigai", "type": "word", "jp": "苦い", "kana": "にがい", "gloss": "苦（い形）", "example": "コーヒーが苦い。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·形容词"], "connections": ["amai", "karai"], "mastery": 2, "due": "2026-07-02", "notes": "味觉组" },
-    { "id": "suppai", "type": "word", "jp": "酸っぱい", "kana": "すっぱい", "gloss": "酸（い形）", "example": "酸っぱいレモン。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·形容词"], "connections": ["amai"], "mastery": 2, "due": "2026-07-02", "notes": "★半浊音ぱ(すっぱい),曾误写すっばい(ば)。味觉组" },
-    { "id": "mazui", "type": "word", "jp": "不味い", "kana": "まずい", "gloss": "难吃（い形）", "example": "まずいパン。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·形容词"], "connections": ["oishii"], "mastery": 2, "due": "2026-07-02", "notes": "↔美味しい(おいしい)。常写假名まずい" },
-    { "id": "itai", "type": "word", "jp": "痛い", "kana": "いたい", "gloss": "痛（い形）", "example": "頭が痛い。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·形容词"], "connections": [], "mastery": 2, "due": "2026-07-02", "notes": "身体不适常用:頭/お腹が痛い" },
-    { "id": "sabishii", "type": "word", "jp": "寂しい", "kana": "さびしい", "gloss": "寂寞（い形）", "example": "一人で寂しい。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·形容词"], "connections": ["ureshii"], "mastery": 2, "due": "2026-07-02", "notes": "情绪组" },
-    { "id": "wakai", "type": "word", "jp": "若い", "kana": "わかい", "gloss": "年轻（い形）", "example": "若い人。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·形容词"], "connections": [], "mastery": 2, "due": "2026-07-02", "notes": "" },
-    { "id": "kashikoi", "type": "word", "jp": "賢い", "kana": "かしこい", "gloss": "聪明（い形）", "example": "賢い子。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·形容词"], "connections": [], "mastery": 2, "due": "2026-07-02", "notes": "" },
-    { "id": "kitanai", "type": "word", "jp": "汚い", "kana": "きたない", "gloss": "脏（い形）", "example": "汚い手。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·形容词"], "connections": [], "mastery": 2, "due": "2026-07-02", "notes": "" },
-    { "id": "kowai", "type": "word", "jp": "怖い", "kana": "こわい", "gloss": "害怕/可怕（い形）", "example": "犬が怖い。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·形容词"], "connections": [], "mastery": 2, "due": "2026-07-02", "notes": "" },
-    { "id": "chairoi", "type": "word", "jp": "茶色い", "kana": "ちゃいろい", "gloss": "棕色（い形）", "example": "茶色い髪。", "first_seen": "2026-06-29", "last_seen": "2026-06-29", "exposures": 2, "active_output": 1, "scenes": ["N5覆盖·形容词"], "connections": [], "mastery": 2, "due": "2026-07-02", "notes": "★形容词带い:茶色い(ちゃいろい);茶色(ちゃいろ)是名词。曾漏い" },
-    { "id": "houga", "type": "grammar", "jp": "〜のほうが", "kana": "", "gloss": "（比较）…更…（AのほうがB；A是更B的一方）", "example": "自炊のほうが安い。", "first_seen": "2026-06-30", "last_seen": "2026-06-30", "exposures": 1, "active_output": 1, "scenes": ["外食自炊"], "connections": ["to-omou"], "mastery": 2, "due": "2026-07-03", "notes": "N5比较。★のほうが贴比较主体(自炊のほうが安い),不贴形容词(曾误'安いのほうが')。常配 より(AよりBのほうが)" },
-    { "id": "tara", "type": "grammar", "jp": "〜たら", "kana": "", "gloss": "如果…的话/…之后（条件，N3 9.4；接续=た形+ら，动词/い形/名词通用）", "example": "お金が貯まったら、家を買いたい。/ 安かったら、買います。", "first_seen": "2026-06-30", "last_seen": "2026-06-30", "exposures": 1, "active_output": 1, "scenes": ["攒钱买房"], "connections": ["tari", "kanoukei", "kaeru"], "mastery": 2, "due": "2026-07-03", "notes": "★N3 9.4双轨点火首个条件句。接续=た形+ら(買った→買ったら/安かった→安かったら)。钩子:た形+り=たり(列举)、た形+ら=たら(条件),同源。首introduce動詞たら+い形たら均一次用对。最万能条件句(假设+时间'…之后')" },
-    { "id": "nara", "type": "grammar", "jp": "〜なら", "kana": "", "gloss": "（既然/如果是）…的话（条件·前提，N3 9.4；接普通形/名词，不变た形；接住前提给建议判断）", "example": "あなたなら、家を買いますか。/ 日本語を勉強したいなら、毎日話すのが一番いいです。", "first_seen": "2026-06-30", "last_seen": "2026-06-30", "exposures": 1, "active_output": 1, "scenes": ["买房/学习建议"], "connections": ["tara", "nominalize"], "mastery": 2, "due": "2026-07-03", "notes": "★N3 9.4。与たら对比(最易混):たら=发生/完成之后(要た形),なら=接住前提给建议(直接接,不变形)。用户曾误'勉強したいたら'(应なら,なら不变形)。经典:着いたら連絡(之后)/行くならこれ買って(前提建议)" },
-    { "id": "soretomo", "type": "word", "jp": "それとも", "kana": "", "gloss": "还是/或者（二选一疑问间，AですかそれともBですか）", "example": "家を買いますか、それとも国に帰りますか。", "first_seen": "2026-06-30", "last_seen": "2026-06-30", "exposures": 1, "active_output": 1, "scenes": ["买房/学习建议"], "connections": [], "mastery": 2, "due": "2026-07-03", "notes": "用户曾用中文'还是'卡住。それとも=两个疑问句之间的'或者'。与や(名词列举)、または(或)区分" }
+    {
+      "id": "renyoukei",
+      "type": "concept",
+      "jp": "連用形",
+      "kana": "れんようけい",
+      "gloss": "万能接口：ます形去掉ます（働き/住み/食べ），后接 たい/やすい/ながら/ましょう 等",
+      "example": "働きます → 働き",
+      "first_seen": "2026-06-24",
+      "last_seen": "2026-06-28",
+      "exposures": 3,
+      "active_output": 2,
+      "scenes": [
+        "赴日打工"
+      ],
+      "connections": [
+        "tai",
+        "yasui",
+        "mashou"
+      ],
+      "mastery": 3,
+      "due": "2026-07-05",
+      "notes": "ましょう(行きましょう/帰りましょう)又一次靠連用形接口"
+    },
+    {
+      "id": "de-particle",
+      "type": "grammar",
+      "jp": "で",
+      "kana": "",
+      "gloss": "动作的舞台 + 手段（用…）",
+      "example": "日本で働く。/ 現金で払う。",
+      "first_seen": "2026-06-24",
+      "last_seen": "2026-06-28",
+      "exposures": 5,
+      "active_output": 4,
+      "scenes": [
+        "赴日打工",
+        "便利店/現金で"
+      ],
+      "connections": [
+        "ni-particle",
+        "hataraku",
+        "kasegu"
+      ],
+      "mastery": 4,
+      "due": "2026-07-14",
+      "notes": "★已掌握。与 に 对比：真做事用で。手段用法:現金で(再次用对)。★对比坑(2026-06-26):同一地点看动词选助词——コンビニに行く(に,行=落点) vs コンビニで買う(で,买=动作舞台)。用户曾误说コンビニに買う,纠正"
+    },
+    {
+      "id": "ni-particle",
+      "type": "grammar",
+      "jp": "に",
+      "kana": "",
+      "gloss": "存在/落点/居住（场所助词）",
+      "example": "日本に住む。/ コンビニに行く。",
+      "first_seen": "2026-06-24",
+      "last_seen": "2026-06-28",
+      "exposures": 6,
+      "active_output": 5,
+      "scenes": [
+        "赴日打工",
+        "便利店",
+        "咖啡厅"
+      ],
+      "connections": [
+        "de-particle",
+        "sumu",
+        "iku",
+        "nokoru",
+        "tsutomeru",
+        "kaeru"
+      ],
+      "mastery": 4,
+      "due": "2026-07-14",
+      "notes": "★已掌握。いる/ある/住む/行く/残る/勤める 用に；本次'コンビニに行きましょう'+'家に帰りたい'再次用对"
+    },
+    {
+      "id": "tai",
+      "type": "grammar",
+      "jp": "〜たい",
+      "kana": "",
+      "gloss": "想做……（接連用形，非た形）",
+      "example": "日本で働きたい。",
+      "first_seen": "2026-06-24",
+      "last_seen": "2026-06-28",
+      "exposures": 6,
+      "active_output": 5,
+      "scenes": [
+        "赴日打工",
+        "亏不亏/国に帰りたい",
+        "咖啡厅"
+      ],
+      "connections": [
+        "renyoukei",
+        "kasegu",
+        "kaeru"
+      ],
+      "mastery": 4,
+      "due": "2026-07-14",
+      "notes": "★已掌握：本次'飲みたい/帰りたい'再用对。★た形(过去)易混。★たい像い形容词,后接から/ので不加だ(飲みたいから○ 飲みたいだから✗)"
+    },
+    {
+      "id": "yasui",
+      "type": "grammar",
+      "jp": "〜やすい",
+      "kana": "",
+      "gloss": "好…… / 容易……（接連用形）",
+      "example": "日本は住みやすい。/ 分かりやすい。",
+      "first_seen": "2026-06-24",
+      "last_seen": "2026-06-30",
+      "exposures": 4,
+      "active_output": 2,
+      "scenes": [
+        "赴日打工",
+        "ATM新闻/分かりやすい",
+        "双轨复验"
+      ],
+      "connections": [
+        "renyoukei",
+        "sumu"
+      ],
+      "mastery": 3,
+      "due": "2026-07-07",
+      "notes": "NHK阅读里复现'分かりやすい'(达2场景)。仅识别未主动产出,差1次输出即可升"
+    },
+    {
+      "id": "kamoshirenai",
+      "type": "grammar",
+      "jp": "〜かもしれない",
+      "kana": "",
+      "gloss": "也许 / 说不定（接普通形，句尾，没把握）",
+      "example": "帰るかもしれない。",
+      "first_seen": "2026-06-24",
+      "last_seen": "2026-06-28",
+      "exposures": 3,
+      "active_output": 2,
+      "scenes": [
+        "赴日打工",
+        "咖啡厅"
+      ],
+      "connections": [
+        "kaeru",
+        "nokoru",
+        "tabun"
+      ],
+      "mastery": 3,
+      "due": "2026-07-05",
+      "notes": "假名顺序易写反：かも・し・れ・ない。本次'家に帰りたいかもしれない'主动用对。与多分(たぶん,句中副词,较肯定)对比:かもしれない句尾、没把握"
+    },
+    {
+      "id": "node",
+      "type": "grammar",
+      "jp": "〜ので",
+      "kana": "",
+      "gloss": "因为……（客观、柔和）",
+      "example": "住みやすいので、住みたいです。",
+      "first_seen": "2026-06-24",
+      "last_seen": "2026-06-28",
+      "exposures": 2,
+      "active_output": 2,
+      "scenes": [
+        "赴日打工",
+        "咖啡厅"
+      ],
+      "connections": [
+        "kara"
+      ],
+      "mastery": 3,
+      "due": "2026-07-05",
+      "notes": "本次'何か飲みたいので'用对。★坑:たい/い形容词后不加だ→飲みたいので○(原误飲みたいだから);名词・な形容词才垫だ(学生だから)"
+    },
+    {
+      "id": "kara",
+      "type": "grammar",
+      "jp": "〜から",
+      "kana": "",
+      "gloss": "因为……（主观、口语）",
+      "example": "お金を稼ぎたいから、日本へ来ました。",
+      "first_seen": "2026-06-24",
+      "last_seen": "2026-07-01",
+      "exposures": 5,
+      "active_output": 3,
+      "scenes": [
+        "赴日打工",
+        "亏不亏分析",
+        "咖啡厅",
+        "双轨复验"
+      ],
+      "connections": [
+        "node",
+        "kasegu",
+        "karatoiitte"
+      ],
+      "mastery": 3,
+      "due": "2026-07-08",
+      "notes": "本次误'飲みたいだから'(い形/たい不加だ)→应飲みたいから/ので,已纠。与ので对比:から主观口语"
+    },
+    {
+      "id": "demo",
+      "type": "grammar",
+      "jp": "でも",
+      "kana": "",
+      "gloss": "但是（转折，句首）",
+      "example": "残るかもしれない。でも、帰りたい。",
+      "first_seen": "2026-06-24",
+      "last_seen": "2026-06-28",
+      "exposures": 3,
+      "active_output": 2,
+      "scenes": [
+        "赴日打工",
+        "咖啡厅"
+      ],
+      "connections": [
+        "noni"
+      ],
+      "mastery": 3,
+      "due": "2026-07-05",
+      "notes": "本次'でも、少し高いですね'主动用对。与のに区别:でも中性另起,のに自带情绪"
+    },
+    {
+      "id": "totemo",
+      "type": "word",
+      "jp": "とても",
+      "kana": "",
+      "gloss": "很 / 非常",
+      "example": "とても帰りたいです。",
+      "first_seen": "2026-06-24",
+      "last_seen": "2026-06-28",
+      "exposures": 2,
+      "active_output": 2,
+      "scenes": [
+        "赴日打工",
+        "咖啡厅"
+      ],
+      "connections": [],
+      "mastery": 3,
+      "due": "2026-07-05",
+      "notes": "本次'とてもおいしい'用对"
+    },
+    {
+      "id": "yappari",
+      "type": "word",
+      "jp": "やっぱり",
+      "kana": "",
+      "gloss": "果然 / 还是",
+      "example": "やっぱり残りたい。",
+      "first_seen": "2026-06-24",
+      "last_seen": "2026-07-01",
+      "exposures": 3,
+      "active_output": 3,
+      "scenes": [
+        "赴日打工",
+        "咖啡厅",
+        "双轨复验"
+      ],
+      "connections": [],
+      "mastery": 3,
+      "due": "2026-07-08",
+      "notes": "07-01这次'やっぱり国に帰りたい'无提示主动用对→脱离需提示状态"
+    },
+    {
+      "id": "ne-particle",
+      "type": "grammar",
+      "jp": "ね",
+      "kana": "",
+      "gloss": "句尾软化/寻求共鸣（……啊/……呢）",
+      "example": "残りたいですね。",
+      "first_seen": "2026-06-24",
+      "last_seen": "2026-06-28",
+      "exposures": 2,
+      "active_output": 2,
+      "scenes": [
+        "赴日打工",
+        "咖啡厅"
+      ],
+      "connections": [],
+      "mastery": 3,
+      "due": "2026-07-05",
+      "notes": "本次'おいしいですね/高いですね'多次自然添加"
+    },
+    {
+      "id": "hataraku",
+      "type": "word",
+      "jp": "働く",
+      "kana": "はたらく",
+      "gloss": "工作/劳动（动作，配で）",
+      "example": "会社で働く人が多い。",
+      "first_seen": "2026-06-24",
+      "last_seen": "2026-06-30",
+      "exposures": 5,
+      "active_output": 3,
+      "scenes": [
+        "赴日打工",
+        "通勤/NHK电车新闻",
+        "阅读·自炊"
+      ],
+      "connections": [
+        "de-particle",
+        "shigoto",
+        "tsutomeru"
+      ],
+      "mastery": 4,
+      "due": "2026-07-16",
+      "notes": "与 仕事(名词)、勤める(归属) 区分。NHK阅读里第2个场景(通勤)复现，达2场景；差1次主动输出即掌握"
+    },
+    {
+      "id": "kasegu",
+      "type": "word",
+      "jp": "稼ぐ",
+      "kana": "かせぐ",
+      "gloss": "挣钱",
+      "example": "お金を稼ぐ。",
+      "first_seen": "2026-06-24",
+      "last_seen": "2026-06-26",
+      "exposures": 3,
+      "active_output": 2,
+      "scenes": [
+        "赴日打工",
+        "亏不亏分析"
+      ],
+      "connections": [
+        "de-particle",
+        "kara",
+        "kanoukei"
+      ],
+      "mastery": 3,
+      "due": "2026-07-03",
+      "notes": "用户主动用对多次：稼ぎたい/稼いだ/稼げなかった。本次'稼げなかった'再用对"
+    },
+    {
+      "id": "sumu",
+      "type": "word",
+      "jp": "住む",
+      "kana": "すむ",
+      "gloss": "居住（状态，配に）",
+      "example": "日本に住む。",
+      "first_seen": "2026-06-24",
+      "last_seen": "2026-07-01",
+      "exposures": 4,
+      "active_output": 3,
+      "scenes": [
+        "赴日打工",
+        "生活·住东京"
+      ],
+      "connections": [
+        "ni-particle",
+        "yasui"
+      ],
+      "mastery": 4,
+      "due": "2026-07-17",
+      "notes": "★已掌握。看似动作却用に(表长期存在)。07-01'東京に住んでいます'再用对"
+    },
+    {
+      "id": "kaeru",
+      "type": "word",
+      "jp": "帰る",
+      "kana": "かえる",
+      "gloss": "回去/回国（往外走）",
+      "example": "中国に帰る。",
+      "first_seen": "2026-06-24",
+      "last_seen": "2026-06-28",
+      "exposures": 5,
+      "active_output": 4,
+      "scenes": [
+        "赴日打工",
+        "亏不亏/本当は帰りたい",
+        "咖啡厅"
+      ],
+      "connections": [
+        "nokoru",
+        "ni-particle",
+        "tai",
+        "hontouwa"
+      ],
+      "mastery": 4,
+      "due": "2026-07-14",
+      "notes": "★已掌握。易与残る贴反；钩子=帰国往外走。本次'家に帰りたいかもしれない'用对。★伪装一段的五段:可能形帰れる(不带ら)"
+    },
+    {
+      "id": "nokoru",
+      "type": "word",
+      "jp": "残る",
+      "kana": "のこる",
+      "gloss": "留下/残留（留原地）",
+      "example": "日本に残る。",
+      "first_seen": "2026-06-24",
+      "last_seen": "2026-07-01",
+      "exposures": 4,
+      "active_output": 3,
+      "scenes": [
+        "赴日打工",
+        "朋友留日"
+      ],
+      "connections": [
+        "kaeru",
+        "ni-particle"
+      ],
+      "mastery": 4,
+      "due": "2026-07-17",
+      "notes": "★已掌握。易与帰る贴反(残=留原地)。07-01'友達は日本に残っています'再用对"
+    },
+    {
+      "id": "iku",
+      "type": "word",
+      "jp": "行く",
+      "kana": "いく",
+      "gloss": "去（落点配に）",
+      "example": "コンビニに行きます。",
+      "first_seen": "2026-06-24",
+      "last_seen": "2026-06-28",
+      "exposures": 4,
+      "active_output": 2,
+      "scenes": [
+        "赴日打工",
+        "便利店",
+        "咖啡厅"
+      ],
+      "connections": [
+        "ni-particle",
+        "mashou"
+      ],
+      "mastery": 3,
+      "due": "2026-07-05",
+      "notes": "本次'コンビニに行きましょう'主动用对(に+ましょう都对)"
+    },
+    {
+      "id": "tsutomeru",
+      "type": "word",
+      "jp": "勤める",
+      "kana": "つとめる",
+      "gloss": "任职于（公司，配に，表归属）",
+      "example": "日本の会社に勤める。",
+      "first_seen": "2026-06-24",
+      "last_seen": "2026-06-30",
+      "exposures": 3,
+      "active_output": 2,
+      "scenes": [
+        "赴日打工",
+        "同乡故事",
+        "双轨复验"
+      ],
+      "connections": [
+        "ni-particle",
+        "hataraku",
+        "sumu",
+        "teiru"
+      ],
+      "mastery": 3,
+      "due": "2026-07-07",
+      "notes": "首次主动用对'東京の会社に勤めています'(に+动词选择都对)。钩子=働く干活(で)/勤める属于(に)，に与住む同家。ている误加っ(勤めっ→勤め)：一段动词去る加て不变音，待巩固"
+    },
+    {
+      "id": "hontouwa",
+      "type": "word",
+      "jp": "本当は",
+      "kana": "ほんとうは",
+      "gloss": "其实（本当+は，话锋一转）",
+      "example": "本当は帰りたい。",
+      "first_seen": "2026-06-24",
+      "last_seen": "2026-06-30",
+      "exposures": 3,
+      "active_output": 2,
+      "scenes": [
+        "赴日打工",
+        "同乡故事",
+        "双轨复验"
+      ],
+      "connections": [
+        "totemo",
+        "kaeru",
+        "wa-contrast"
+      ],
+      "mastery": 3,
+      "due": "2026-07-07",
+      "notes": "正式拆开。首次漏は(本当→本当は)，纠正后'彼は本当は国に帰りたい'用对。钩子=本当(真的)+は转折→其实；は与'損だとは'同一对比味"
+    },
+    {
+      "id": "son",
+      "type": "word",
+      "jp": "損",
+      "kana": "そん",
+      "gloss": "亏/吃亏（損だ/損する）",
+      "example": "稼げなかったから、損だと思う。",
+      "first_seen": "2026-06-24",
+      "last_seen": "2026-06-30",
+      "exposures": 3,
+      "active_output": 2,
+      "scenes": [
+        "赴日打工",
+        "买房亏不亏",
+        "外食自炊"
+      ],
+      "connections": [
+        "kasegu",
+        "to-omou",
+        "karatoiitte"
+      ],
+      "mastery": 3,
+      "due": "2026-07-07",
+      "notes": "读音そん拿下(汉字'損'=损失)。多次用对'損だと思います'/'損だとは限らない'。形容词式損だ/动词式損する"
+    },
+    {
+      "id": "kanoukei",
+      "type": "concept",
+      "jp": "可能形",
+      "kana": "かのうけい",
+      "gloss": "能不能做：五段 う段→え段+る（稼ぐ→稼げる）；一段 去る+られる（食べる→食べられる）；不规则 する→できる、来る→来られる；另:动词原形+ことができる 等价",
+      "example": "確認できます。/ 読むことができる。",
+      "first_seen": "2026-06-24",
+      "last_seen": "2026-06-26",
+      "exposures": 4,
+      "active_output": 4,
+      "scenes": [
+        "赴日打工",
+        "可能形造句",
+        "ATM新闻/確認できる"
+      ],
+      "connections": [
+        "kasegu",
+        "ga-particle",
+        "tari",
+        "kakunin"
+      ],
+      "mastery": 5,
+      "due": "2026-07-31",
+      "notes": "★彻底通关:规则(五段/一段)+两个刺头(する→できる、来る→来られる)+ことができる三件套全齐。でき=できる词干。★坑:帰る/入る/要る/走る/知る是伪装成一段的五段,可能形不带ら(帰れる不是帰られる)"
+    },
+    {
+      "id": "karatoiitte",
+      "type": "grammar",
+      "jp": "〜からといって",
+      "kana": "",
+      "gloss": "不能因为…就…/虽说…（N2 10.2 因果与逻辑）",
+      "example": "日本に来たからといって、お金を稼げるとは限らない。",
+      "first_seen": "2026-06-24",
+      "last_seen": "2026-06-30",
+      "exposures": 3,
+      "active_output": 2,
+      "scenes": [
+        "赴日打工",
+        "买房亏不亏",
+        "外食自炊"
+      ],
+      "connections": [
+        "kara",
+        "tohakagiranai",
+        "son"
+      ],
+      "mastery": 3,
+      "due": "2026-07-07",
+      "notes": "N2 10.2。06-30'外食は高いからといって、損だとは限らない'再次主动用对(三语法连用)。常配'〜とは限らない'"
+    },
+    {
+      "id": "teiru",
+      "type": "grammar",
+      "jp": "〜ている",
+      "kana": "",
+      "gloss": "动作/状态持续（残っている=一直留着、混んでいる=一直挤着、飲んでいます=正在喝）",
+      "example": "コーヒーを飲んでいます。",
+      "first_seen": "2026-06-24",
+      "last_seen": "2026-07-01",
+      "exposures": 4,
+      "active_output": 2,
+      "scenes": [
+        "赴日打工/残る",
+        "NHK电车新闻",
+        "飲む造句"
+      ],
+      "connections": [
+        "nokoru",
+        "teform",
+        "nomu"
+      ],
+      "mastery": 3,
+      "due": "2026-07-08",
+      "notes": "用户自己提问驱动(高保留)。两半=て形+いる。首次主动输出'コーヒーを飲んでいます'(还自带ています礼貌体)正确。て形音便(む/ぶ/ぬ→んで; る/つ/う→って)待系统拆"
+    },
+    {
+      "id": "daijoubu",
+      "type": "word",
+      "jp": "大丈夫です",
+      "kana": "だいじょうぶです",
+      "gloss": "不用了/没关系（万能婉拒神器）",
+      "example": "袋は大丈夫です。",
+      "first_seen": "2026-06-25",
+      "last_seen": "2026-06-28",
+      "exposures": 4,
+      "active_output": 3,
+      "scenes": [
+        "便利店",
+        "咖啡厅"
+      ],
+      "connections": [
+        "onegaishimasu"
+      ],
+      "mastery": 4,
+      "due": "2026-07-14",
+      "notes": "★已掌握(mastery4/active3/scenes2)。婉拒一切：不要袋子/勺子/帮忙都用。与 お願いします 配成一对。本次咖啡厅再用对"
+    },
+    {
+      "id": "onegaishimasu",
+      "type": "word",
+      "jp": "お願いします",
+      "kana": "おねがいします",
+      "gloss": "麻烦了/拜托了（万能接受神器）",
+      "example": "現金で、お願いします。",
+      "first_seen": "2026-06-25",
+      "last_seen": "2026-06-28",
+      "exposures": 3,
+      "active_output": 2,
+      "scenes": [
+        "便利店",
+        "咖啡厅"
+      ],
+      "connections": [
+        "daijoubu"
+      ],
+      "mastery": 3,
+      "due": "2026-07-05",
+      "notes": "接受/拜托。与 大丈夫です(婉拒) 配对。本次'これお願いします/現金でお願いします'用对"
+    },
+    {
+      "id": "tekudasai",
+      "type": "grammar",
+      "jp": "〜てください",
+      "kana": "",
+      "gloss": "请（你）做……（て形+ください）",
+      "example": "温めてください。",
+      "first_seen": "2026-06-25",
+      "last_seen": "2026-06-28",
+      "exposures": 2,
+      "active_output": 2,
+      "scenes": [
+        "便利店",
+        "咖啡厅"
+      ],
+      "connections": [
+        "teiru",
+        "teform",
+        "atatameru"
+      ],
+      "mastery": 3,
+      "due": "2026-07-05",
+      "notes": "本次'温めてください'再次主动用对。与をください(给某物)对照"
+    },
+    {
+      "id": "konbini",
+      "type": "word",
+      "jp": "コンビニ",
+      "kana": "",
+      "gloss": "便利店（convenience store）",
+      "example": "コンビニに行きます。",
+      "first_seen": "2026-06-25",
+      "last_seen": "2026-06-28",
+      "exposures": 3,
+      "active_output": 2,
+      "scenes": [
+        "便利店",
+        "咖啡厅"
+      ],
+      "connections": [
+        "iku"
+      ],
+      "mastery": 3,
+      "due": "2026-07-05",
+      "notes": "外来语。本次'コンビニに行きましょう'用对"
+    },
+    {
+      "id": "atatameru",
+      "type": "word",
+      "jp": "温める",
+      "kana": "あたためる",
+      "gloss": "加热（便当微波）",
+      "example": "温めてください。",
+      "first_seen": "2026-06-25",
+      "last_seen": "2026-06-28",
+      "exposures": 3,
+      "active_output": 2,
+      "scenes": [
+        "便利店",
+        "咖啡厅"
+      ],
+      "connections": [
+        "tekudasai"
+      ],
+      "mastery": 3,
+      "due": "2026-07-05",
+      "notes": "店员台词'温めますか'；本次'温めてください'再用对"
+    },
+    {
+      "id": "genkin",
+      "type": "word",
+      "jp": "現金",
+      "kana": "げんきん",
+      "gloss": "现金",
+      "example": "現金で、お願いします。",
+      "first_seen": "2026-06-25",
+      "last_seen": "2026-06-28",
+      "exposures": 2,
+      "active_output": 2,
+      "scenes": [
+        "便利店",
+        "咖啡厅"
+      ],
+      "connections": [
+        "de-particle"
+      ],
+      "mastery": 3,
+      "due": "2026-07-05",
+      "notes": "配 で 表手段：現金で(用现金)。本次再用对"
+    },
+    {
+      "id": "keigo-houkou",
+      "type": "concept",
+      "jp": "敬语方向（お〜）",
+      "kana": "",
+      "gloss": "两种お：①お+动词连用形+です/になる=尊敬(指对方,自己摘掉)；②お+名词=美化(自己也能用)",
+      "example": "お持ちですか(尊敬)→自己说持っていません；お会計(美化)自己也用",
+      "first_seen": "2026-06-25",
+      "last_seen": "2026-06-26",
+      "exposures": 2,
+      "active_output": 1,
+      "scenes": [
+        "便利店",
+        "敬语判断"
+      ],
+      "connections": [
+        "daijoubu",
+        "kaikei"
+      ],
+      "mastery": 3,
+      "due": "2026-07-03",
+      "notes": "★坑已填平。用户真问题是'认不出お是粘的还是词本身'。尺子=去掉お剩动词零件(持ち/帰り)→尊敬别自用；剩独立名词(会計/茶/願い)→美化能自用。三连判断全对并能讲出依据"
+    },
+    {
+      "id": "iru-need",
+      "type": "word",
+      "jp": "要る",
+      "kana": "いる",
+      "gloss": "需要（要不要的'要'；要的东西配 が/は）",
+      "example": "レジ袋は要りません。",
+      "first_seen": "2026-06-25",
+      "last_seen": "2026-07-01",
+      "exposures": 3,
+      "active_output": 3,
+      "scenes": [
+        "便利店",
+        "咖啡厅",
+        "双轨复验"
+      ],
+      "connections": [
+        "okudasai",
+        "kanoukei"
+      ],
+      "mastery": 3,
+      "due": "2026-07-08",
+      "notes": "★今日再踩两坑:①误用を(要る要的东西配が/は,婉拒用は)②误活用'いるない'——要る是伪装一段的五段→否定要らない(いらない)/要りません(いりません),多个ら/り。均已纠,需继续watch。汉字'要'=要不要的要。与居る(在)同音いる靠场景分"
+    },
+    {
+      "id": "okudasai",
+      "type": "grammar",
+      "jp": "〜をください",
+      "kana": "",
+      "gloss": "请给我（名词）+を+ください",
+      "example": "袋を一つください。/ これをください。",
+      "first_seen": "2026-06-25",
+      "last_seen": "2026-07-01",
+      "exposures": 4,
+      "active_output": 2,
+      "scenes": [
+        "便利店",
+        "咖啡厅"
+      ],
+      "connections": [
+        "tekudasai",
+        "kore"
+      ],
+      "mastery": 2,
+      "due": "2026-07-04",
+      "notes": "与てください对照。★07-01又漏を(说'スプーン一つください'应'スプーンを一つください')。を反复漏,继续盯"
+    },
+    {
+      "id": "kaikei",
+      "type": "word",
+      "jp": "お会計",
+      "kana": "おかいけい",
+      "gloss": "结账/买单（吃喝后清算用；配 お願いします）",
+      "example": "お会計をお願いします。",
+      "first_seen": "2026-06-25",
+      "last_seen": "2026-06-30",
+      "exposures": 3,
+      "active_output": 2,
+      "scenes": [
+        "便利店/餐厅",
+        "敬语判断",
+        "双轨复验"
+      ],
+      "connections": [
+        "onegaishimasu",
+        "keigo-houkou"
+      ],
+      "mastery": 3,
+      "due": "2026-07-07",
+      "notes": "饭店买单最对口；零售用これお願いします。本次判断对:お会計的お是'美化'(会計是独立名词),自己也能用。居酒屋也说お勘定"
+    },
+    {
+      "id": "kore",
+      "type": "word",
+      "jp": "これ",
+      "kana": "",
+      "gloss": "这个（单独代词，后面不接名词；对比 この+名词）",
+      "example": "これをください。/ このコーヒー。",
+      "first_seen": "2026-06-25",
+      "last_seen": "2026-06-29",
+      "exposures": 3,
+      "active_output": 2,
+      "scenes": [
+        "便利店",
+        "咖啡厅",
+        "N5覆盖·食物饮品"
+      ],
+      "connections": [
+        "okudasai",
+        "kono",
+        "aji"
+      ],
+      "mastery": 3,
+      "due": "2026-07-06",
+      "notes": "★これ vs この(N5头号易混):これ自己站(后不接名词);この要扶名词(このコーヒー/この店)。★第2次复发(06-28 これコーヒー / 06-29 これ味)→均纠为この。顽固易混点,需持续盯到不再错"
+    },
+    {
+      "id": "rejibukuro",
+      "type": "word",
+      "jp": "レジ袋",
+      "kana": "レジぶくろ",
+      "gloss": "购物袋/收银塑料袋",
+      "example": "レジ袋は要りません。",
+      "first_seen": "2026-06-25",
+      "last_seen": "2026-07-01",
+      "exposures": 3,
+      "active_output": 2,
+      "scenes": [
+        "便利店",
+        "咖啡厅",
+        "双轨复验"
+      ],
+      "connections": [
+        "iru-need"
+      ],
+      "mastery": 3,
+      "due": "2026-07-08",
+      "notes": "★末尾误说'レジ'(=收银台)漏了袋→レジ袋才是袋子,别丢袋。已纠"
+    },
+    {
+      "id": "sumimasen",
+      "type": "word",
+      "jp": "すみません",
+      "kana": "",
+      "gloss": "万能：道歉/道谢/叫人(引起注意)",
+      "example": "すみません、お会計をお願いします。",
+      "first_seen": "2026-06-25",
+      "last_seen": "2026-06-25",
+      "exposures": 2,
+      "active_output": 2,
+      "scenes": [
+        "便利店"
+      ],
+      "connections": [],
+      "mastery": 3,
+      "due": "2026-07-02",
+      "notes": "店员不在时拖长音'すみませーん'召唤"
+    },
+    {
+      "id": "to-omou",
+      "type": "grammar",
+      "jp": "〜と思う",
+      "kana": "とおもう",
+      "gloss": "我觉得/我认为（と=引号助词，把想法打包交给思う）",
+      "example": "損だと思います。",
+      "first_seen": "2026-06-26",
+      "last_seen": "2026-06-30",
+      "exposures": 2,
+      "active_output": 2,
+      "scenes": [
+        "买房亏不亏",
+        "外食自炊"
+      ],
+      "connections": [
+        "son",
+        "tohakagiranai"
+      ],
+      "mastery": 3,
+      "active_output_note": "用户最想要的'我觉得'表达。首次纠正后用对'損だと思います'(原误:损だ思うています→漏と+多ています)。钩子=と是思う前的引号；想法直接用思います不加ています",
+      "mastery_was": "教学门槛日:挣扎项满,本项是纠错中自然带出,非主动新增",
+      "notes": "★高频表达观点(★★★★★)。「○○」と思う。注意:と不可省;'觉得'用朴素思います。06-30'自炊のほうが安いと思います'再用对(配のほうが比较)",
+      "due": "2026-07-07"
+    },
+    {
+      "id": "tohakagiranai",
+      "type": "grammar",
+      "jp": "〜とは限らない",
+      "kana": "とはかぎらない",
+      "gloss": "未必/不一定（限る=かぎる限定，否定→不限于此）",
+      "example": "高いからといって、損だとは限らない。",
+      "first_seen": "2026-06-26",
+      "last_seen": "2026-06-30",
+      "exposures": 2,
+      "active_output": 2,
+      "scenes": [
+        "买房亏不亏",
+        "外食自炊"
+      ],
+      "connections": [
+        "karatoiitte",
+        "to-omou",
+        "son"
+      ],
+      "mastery": 3,
+      "due": "2026-07-07",
+      "notes": "N2 10.6 推断与判断。常与からといって搭。06-30'損だとは限らない'再用对。限らない读かぎらない。と+は强调对比"
+    },
+    {
+      "id": "noni",
+      "type": "grammar",
+      "jp": "〜のに",
+      "kana": "",
+      "gloss": "明明…却…（逆接，带意外/不满/惋惜的情绪；接普通形）",
+      "example": "給料が上がったのに、貯金できない。",
+      "first_seen": "2026-06-26",
+      "last_seen": "2026-06-26",
+      "exposures": 3,
+      "active_output": 2,
+      "scenes": [
+        "工资攒不下",
+        "同乡想回回不去"
+      ],
+      "connections": [
+        "demo",
+        "tsutomeru",
+        "hontouwa",
+        "kaeru"
+      ],
+      "mastery": 3,
+      "due": "2026-07-03",
+      "notes": "★定级断层N3已补(N3 9.3)。首日3句2场景主动用对。与でも区别:のに自带情绪(不满/可惜)黏前句屁股,でも中性另起。接普通形(上がった/勤めている+のに)"
+    },
+    {
+      "id": "tari",
+      "type": "grammar",
+      "jp": "〜たり〜たり",
+      "kana": "",
+      "gloss": "又…又…（列举代表动作；动词た形+り，最后收する）",
+      "example": "お弁当を買ったり、お金を出したりします。",
+      "first_seen": "2026-06-26",
+      "last_seen": "2026-06-30",
+      "exposures": 3,
+      "active_output": 2,
+      "scenes": [
+        "便利店/ATM",
+        "外食自炊"
+      ],
+      "connections": [
+        "kanoukei",
+        "de-particle"
+      ],
+      "mastery": 3,
+      "due": "2026-07-07",
+      "notes": "N3 9.11。★たり接た形(研究したり/作ったり/買ったり),06-30先误辞書形+たり(研究するたり)纠正后用对。时态只压句尾する。最后收します"
+    },
+    {
+      "id": "kakunin",
+      "type": "word",
+      "jp": "確認",
+      "kana": "かくにん",
+      "gloss": "确认（確認する/できる）",
+      "example": "在留カードで本人を確認できます。",
+      "first_seen": "2026-06-26",
+      "last_seen": "2026-06-30",
+      "exposures": 3,
+      "active_output": 2,
+      "scenes": [
+        "NHK ATM新闻",
+        "双轨复验"
+      ],
+      "connections": [
+        "kanoukei",
+        "de-particle"
+      ],
+      "mastery": 3,
+      "due": "2026-07-07",
+      "notes": "阅读捞出。用户主动用对'確認できます'(する→できる)"
+    },
+    {
+      "id": "nitotte",
+      "type": "grammar",
+      "jp": "〜にとって",
+      "kana": "",
+      "gloss": "对…来说/站在…的角度（名词+にとって，后接判断评价）",
+      "example": "私にとって、貯金は難しいです。",
+      "first_seen": "2026-06-26",
+      "last_seen": "2026-06-30",
+      "exposures": 3,
+      "active_output": 3,
+      "scenes": [
+        "外国人买房难",
+        "我·攒钱难",
+        "外食自炊"
+      ],
+      "connections": [
+        "ni-particle",
+        "nitsuite",
+        "nominalize"
+      ],
+      "mastery": 4,
+      "due": "2026-07-16",
+      "notes": "★已掌握(N3 9.12,mastery4/active3/scenes3)。06-30'今の私にとって、自炊は難しいです'用对。に+とって=拿…来看,后接评价。与について区别:にとって看视角,について圈话题"
+    },
+    {
+      "id": "nitsuite",
+      "type": "grammar",
+      "jp": "〜について",
+      "kana": "",
+      "gloss": "关于…（名词/こと+について，后接言说思考类:話す/考える/書く）",
+      "example": "家を買うことについて、よく考えます。",
+      "first_seen": "2026-06-26",
+      "last_seen": "2026-06-30",
+      "exposures": 2,
+      "active_output": 2,
+      "scenes": [
+        "买房·思考",
+        "双轨复验"
+      ],
+      "connections": [
+        "nitotte",
+        "nominalize",
+        "kangaeru"
+      ],
+      "mastery": 3,
+      "due": "2026-07-07",
+      "notes": "N3 9.12。について圈话题(后接说/想/写)。★前面动词要用こと打包:買うことについて(不是買うのについて)。与にとって(视角)配对"
+    },
+    {
+      "id": "nominalize",
+      "type": "concept",
+      "jp": "名词化 の/こと",
+      "kana": "",
+      "gloss": "把动词变名词的两个工具:の接は/が/だ;こと接について等词组助词;名词本身不用打包",
+      "example": "買うのは難しい / 買うことについて考える",
+      "first_seen": "2026-06-26",
+      "last_seen": "2026-06-30",
+      "exposures": 4,
+      "active_output": 2,
+      "scenes": [
+        "买房分析",
+        "双轨复验"
+      ],
+      "connections": [
+        "nitsuite",
+        "nitotte"
+      ],
+      "mastery": 3,
+      "due": "2026-07-07",
+      "notes": "★今日3次易错:①の+こと叠用(買うのこと✗)②给名词加の(貯金のは✗,貯金已是名词直接は)③について前用の(買うのについて✗→買うこと)。规律:の后跟光杆は/が;こと后跟词组助词;名词不打包。需继续watch"
+    },
+    {
+      "id": "kangaeru",
+      "type": "word",
+      "jp": "考える",
+      "kana": "かんがえる",
+      "gloss": "思考/考虑（一段动词）",
+      "example": "家を買うことについて、よく考えます。",
+      "first_seen": "2026-06-26",
+      "last_seen": "2026-06-30",
+      "exposures": 2,
+      "active_output": 2,
+      "scenes": [
+        "买房·思考",
+        "双轨复验"
+      ],
+      "connections": [
+        "nitsuite"
+      ],
+      "mastery": 3,
+      "due": "2026-07-07",
+      "notes": "用户主动用对'よく考えます'。一段动词(考え+る)。贴用户'爱分析琢磨'的高频词"
+    },
+    {
+      "id": "mashou",
+      "type": "grammar",
+      "jp": "〜ましょう",
+      "kana": "",
+      "gloss": "（一起）…吧 / 我们…吧（連用形+ましょう，邀请/提议）",
+      "example": "コンビニに行きましょう。/ 帰りましょう。",
+      "first_seen": "2026-06-28",
+      "last_seen": "2026-07-01",
+      "exposures": 4,
+      "active_output": 2,
+      "scenes": [
+        "咖啡厅",
+        "双轨复验"
+      ],
+      "connections": [
+        "renyoukei",
+        "iku"
+      ],
+      "mastery": 3,
+      "due": "2026-07-08",
+      "notes": "N5新增。一次就对'コンビニに行きましょう'。连用形(行き/帰り/飲み)+ましょう=邀请。比ましょうか更直接"
+    },
+    {
+      "id": "nanika",
+      "type": "word",
+      "jp": "何か",
+      "kana": "なにか",
+      "gloss": "某样东西/点什么（か=不确定）",
+      "example": "何か飲みたい。",
+      "first_seen": "2026-06-28",
+      "last_seen": "2026-07-03",
+      "exposures": 4,
+      "active_output": 2,
+      "scenes": [
+        "咖啡厅",
+        "形容词造句"
+      ],
+      "connections": [
+        "nominalize"
+      ],
+      "mastery": 3,
+      "due": "2026-07-10",
+      "notes": "★易混:何か(某/点什么,か无浊点) vs 何を(疑问) vs 何が(主语)。06-29'何か冷たいもの'结构里何か用对(差もの已纠)→脱离挣扎。か=不确定(誰か/どこか同理)"
+    },
+    {
+      "id": "sukoshi",
+      "type": "word",
+      "jp": "少し",
+      "kana": "すこし",
+      "gloss": "一点/稍微（比 ちょっと 略正式）",
+      "example": "少し高いです。",
+      "first_seen": "2026-06-28",
+      "last_seen": "2026-07-01",
+      "exposures": 2,
+      "active_output": 2,
+      "scenes": [
+        "咖啡厅",
+        "双轨复验"
+      ],
+      "connections": [],
+      "mastery": 3,
+      "due": "2026-07-08",
+      "notes": "N5新增。用户主动用对'少し高いです'。与ちょっと(更口语)同义,少し略书面/礼貌"
+    },
+    {
+      "id": "sou-kansetsu",
+      "type": "concept",
+      "jp": "そう（间接标记）",
+      "kana": "",
+      "gloss": "そう='间接'专用:様態おいしそう(看起来,去い)/伝聞おいしいそうだ(听说);亲身经历直接说おいしいです,别加そう",
+      "example": "おいしそう(看起来好吃) / おいしいそうだ(听说好吃) / 〔正在吃〕おいしいです",
+      "first_seen": "2026-06-28",
+      "last_seen": "2026-06-28",
+      "exposures": 3,
+      "active_output": 1,
+      "scenes": [
+        "咖啡厅",
+        "形容词造句",
+        "そう专练"
+      ],
+      "connections": [],
+      "mastery": 2,
+      "due": "2026-07-03",
+      "notes": "★06-30对照专练4/4全对→攻破。规律:様態=去い+そう(おいしそう/面白そう,看起来/眼前);伝聞=普通形+そうだ(おいしいそうだ/帰るそうだ,听说)。对照format破坑;曾06-28/06-29连错。继续盯巩固"
+    },
+    {
+      "id": "shokuji",
+      "type": "word",
+      "jp": "食事",
+      "kana": "しょくじ",
+      "gloss": "用餐/餐（食事をする/取る）",
+      "example": "食事を取る。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 1,
+      "scenes": [
+        "N5覆盖·食物饮品"
+      ],
+      "connections": [],
+      "mastery": 1,
+      "due": "2026-07-04",
+      "notes": "N5覆盖缺口。用户绕成'ご飯を食べるの',正式名词=食事。サ变:食事する。同日造句'食事をしました'主动用对 |07-03复验遗忘,降m1短周期重练"
+    },
+    {
+      "id": "oyu",
+      "type": "word",
+      "jp": "お湯",
+      "kana": "おゆ",
+      "gloss": "热水/开水",
+      "example": "お湯を沸かす。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 1,
+      "scenes": [
+        "N5覆盖·食物饮品"
+      ],
+      "connections": [
+        "mizu"
+      ],
+      "mastery": 1,
+      "due": "2026-07-04",
+      "notes": "★对比 水(みず)=凉水:日语 お湯=热的、水=冷的,分得清。'お湯をください'用对(先漏を已纠) |07-03复验遗忘,降m1短周期重练"
+    },
+    {
+      "id": "shouyu",
+      "type": "word",
+      "jp": "醤油",
+      "kana": "しょうゆ",
+      "gloss": "酱油",
+      "example": "醤油をかける。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 2,
+      "scenes": [
+        "N5覆盖·食物饮品"
+      ],
+      "connections": [],
+      "mastery": 3,
+      "due": "2026-07-10",
+      "notes": "N5覆盖缺口。读 しょうゆ(长音)。'醤油をかけてください'用对(带て形)"
+    },
+    {
+      "id": "mikan",
+      "type": "word",
+      "jp": "みかん",
+      "kana": "みかん",
+      "gloss": "蜜橘/橘子",
+      "example": "みかんは甘い。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 1,
+      "scenes": [
+        "N5覆盖·食物饮品"
+      ],
+      "connections": [],
+      "mastery": 1,
+      "due": "2026-07-04",
+      "notes": "★用户说成 オレンジ(西式橙);日本日常蜜橘=みかん。'みかんはとても甘いです'用对 |07-03复验遗忘,降m1短周期重练 ★第2次误オレンジ,极不粘"
+    },
+    {
+      "id": "budou",
+      "type": "word",
+      "jp": "ぶどう",
+      "kana": "ぶどう",
+      "gloss": "葡萄",
+      "example": "ぶどうを食べる。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 1,
+      "scenes": [
+        "N5覆盖·食物饮品"
+      ],
+      "connections": [
+        "wain"
+      ],
+      "mastery": 1,
+      "due": "2026-07-04",
+      "notes": "N5覆盖缺口。ワイン=ぶどう酒可联想。'いちごとぶどうが好き'用对(写汉字葡萄,日常用假名ぶどう) |07-03复验遗忘,降m1短周期重练"
+    },
+    {
+      "id": "ichigo",
+      "type": "word",
+      "jp": "いちご",
+      "kana": "いちご",
+      "gloss": "草莓",
+      "example": "いちごのケーキ。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 1,
+      "scenes": [
+        "N5覆盖·食物饮品"
+      ],
+      "connections": [
+        "keeki"
+      ],
+      "mastery": 1,
+      "due": "2026-07-04",
+      "notes": "N5覆盖缺口。'いちごとぶどうが好き'用对 |07-03复验遗忘,降m1短周期重练"
+    },
+    {
+      "id": "ame",
+      "type": "word",
+      "jp": "飴",
+      "kana": "あめ",
+      "gloss": "糖果（含化的糖）",
+      "example": "飴を舐める。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 2,
+      "scenes": [
+        "N5覆盖·食物饮品"
+      ],
+      "connections": [
+        "okashi",
+        "satou"
+      ],
+      "mastery": 3,
+      "due": "2026-07-10",
+      "notes": "★三个'糖'区分:飴(あめ)=含化糖果/お菓子=点心总称/砂糖(さとう)=做菜的糖。'弟は飴を食べています'用对(带ている)"
+    },
+    {
+      "id": "juice",
+      "type": "word",
+      "jp": "ジュース",
+      "kana": "ジュース",
+      "gloss": "果汁/饮料",
+      "example": "ジュースを買う。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 1,
+      "scenes": [
+        "N5覆盖·食物饮品"
+      ],
+      "connections": [
+        "katakana-form"
+      ],
+      "mastery": 1,
+      "due": "2026-07-04",
+      "notes": "N5覆盖缺口(片假名)。'ジュースを飲みたい'用对 |07-03复验遗忘,降m1短周期重练 ★又片假名形错(じゅす)"
+    },
+    {
+      "id": "aji",
+      "type": "word",
+      "jp": "味",
+      "kana": "あじ",
+      "gloss": "味道",
+      "example": "味が薄い。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 1,
+      "scenes": [
+        "N5覆盖·食物饮品"
+      ],
+      "connections": [
+        "kore"
+      ],
+      "mastery": 1,
+      "due": "2026-07-04",
+      "notes": "N5覆盖缺口。味が薄い/濃い。'この味は少し薄い'用对。★再踩これ→この(误これ味)已纠,见kore |07-03复验遗忘,降m1短周期重练"
+    },
+    {
+      "id": "keeki",
+      "type": "word",
+      "jp": "ケーキ",
+      "kana": "ケーキ",
+      "gloss": "蛋糕",
+      "example": "ケーキを切る。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 2,
+      "scenes": [
+        "N5覆盖·食物饮品"
+      ],
+      "connections": [
+        "katakana-form",
+        "ichigo"
+      ],
+      "mastery": 3,
+      "due": "2026-07-10",
+      "notes": "★片假名形错:首次说成 カーキ(卡其色)。ケーキ=ke-ki。同日'このケーキは甘いですね'用对,ケーキ写对未再カーキ"
+    },
+    {
+      "id": "aisukuriimu",
+      "type": "word",
+      "jp": "アイスクリーム",
+      "kana": "アイスクリーム",
+      "gloss": "冰淇淋（口语略 アイス）",
+      "example": "アイスクリームを食べる。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-06-30",
+      "exposures": 3,
+      "active_output": 1,
+      "scenes": [
+        "N5覆盖·食物饮品",
+        "片假名听写"
+      ],
+      "connections": [
+        "katakana-form"
+      ],
+      "mastery": 2,
+      "due": "2026-07-03",
+      "notes": "★曾错3种(スクリーム/アイスリーム/アイスクレーム)。06-30片假名听写一次写对アイスクリーム→脱离挣扎。死记 アイス(ice)+クリーム(cream)。听写format比造句有效"
+    },
+    {
+      "id": "koppu",
+      "type": "word",
+      "jp": "コップ",
+      "kana": "コップ",
+      "gloss": "玻璃杯（无把手）",
+      "example": "コップに水を入れる。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 1,
+      "scenes": [
+        "N5覆盖·食物饮品"
+      ],
+      "connections": [
+        "katakana-form"
+      ],
+      "mastery": 1,
+      "due": "2026-07-04",
+      "notes": "★片假名形错:首次说成 カープ(鲤鱼/广岛队)。コップ(荷兰語kop)=无把手玻璃杯;カップ=带把咖啡杯。'コップに水を入れる'用对(先漏动词入れる已纠) |07-03复验遗忘,降m1短周期重练"
+    },
+    {
+      "id": "katakana-form",
+      "type": "concept",
+      "jp": "片假名外来词的形",
+      "kana": "",
+      "gloss": "听得懂但说不准片假名的'形'(长音/拨音/拗音):ラーメン(非ラーメ)、ケーキ(非カーキ)、アイスクリーム(非スクリーム)、コップ(非カープ)",
+      "example": "ケーキ○/カーキ✗(卡其) ; コップ○/カープ✗(鲤鱼)",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-06-29",
+      "exposures": 4,
+      "active_output": 1,
+      "scenes": [
+        "N5覆盖·食物饮品",
+        "形容词造句",
+        "片假名听写"
+      ],
+      "connections": [
+        "keeki",
+        "koppu",
+        "aisukuriimu",
+        "juice"
+      ],
+      "mastery": 2,
+      "due": "2026-07-03",
+      "notes": "★元模式:外来词意思懂但片假名形念歪(カーキ/スクリーム/カープ)。06-30片假名听写6/6全对(アイスクリーム/コーヒー/ジュース/スプーン/ビール/ケーキ)→听写format有效,优于造句。继续定期听写巩固"
+    },
+    {
+      "id": "amai",
+      "type": "word",
+      "jp": "甘い",
+      "kana": "あまい",
+      "gloss": "甜（い形容词）",
+      "example": "このケーキは甘いです。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 4,
+      "active_output": 3,
+      "scenes": [
+        "N5覆盖·食物饮品",
+        "N5覆盖·形容词"
+      ],
+      "connections": [
+        "karai",
+        "nigai"
+      ],
+      "mastery": 3,
+      "due": "2026-07-10",
+      "notes": "形容词覆盖。多次主动用对(甘いですね/とても甘いです)。味觉组:甘い/辛い/苦い/酸っぱい"
+    },
+    {
+      "id": "isogashii",
+      "type": "word",
+      "jp": "忙しい",
+      "kana": "いそがしい",
+      "gloss": "忙（い形容词）",
+      "example": "今日は忙しいです。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 1,
+      "scenes": [
+        "N5覆盖·形容词"
+      ],
+      "connections": [],
+      "mastery": 1,
+      "due": "2026-07-04",
+      "notes": "形容词覆盖。recall时未答出,造句'今日は忙しいです'主动用对 |07-03复验遗忘,降m1短周期重练"
+    },
+    {
+      "id": "tsumetai",
+      "type": "word",
+      "jp": "冷たい",
+      "kana": "つめたい",
+      "gloss": "凉/冰（触感；い形容词）",
+      "example": "水が冷たい。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 2,
+      "scenes": [
+        "N5覆盖·形容词"
+      ],
+      "connections": [
+        "suzushii",
+        "atsui-hot"
+      ],
+      "mastery": 3,
+      "due": "2026-07-10",
+      "notes": "★温度组:冷たい(触感冰,水/手)vs 涼しい(天气凉爽舒服)。用户首写すめたい(应つめたい),造句'何か冷たいもの'冷たい用对(差もの已纠)"
+    },
+    {
+      "id": "warui",
+      "type": "word",
+      "jp": "悪い",
+      "kana": "わるい",
+      "gloss": "坏（い形）",
+      "example": "悪い人。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 1,
+      "scenes": [
+        "N5覆盖·形容词"
+      ],
+      "connections": [
+        "ii"
+      ],
+      "mastery": 1,
+      "due": "2026-07-04",
+      "notes": "形容词反复练通关。↔いい |07-03复验遗忘,降m1短周期重练"
+    },
+    {
+      "id": "hikui",
+      "type": "word",
+      "jp": "低い",
+      "kana": "ひくい",
+      "gloss": "低（い形）",
+      "example": "声が低い。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 2,
+      "scenes": [
+        "N5覆盖·形容词"
+      ],
+      "connections": [
+        "takai"
+      ],
+      "mastery": 3,
+      "due": "2026-07-10",
+      "notes": "★高い反义:高度↔低い;价钱↔安い。曾误用安い答'低'"
+    },
+    {
+      "id": "nagai",
+      "type": "word",
+      "jp": "長い",
+      "kana": "ながい",
+      "gloss": "长（い形）",
+      "example": "髪が長い。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 2,
+      "scenes": [
+        "N5覆盖·形容词"
+      ],
+      "connections": [
+        "mijikai"
+      ],
+      "mastery": 3,
+      "due": "2026-07-10",
+      "notes": "形容词反复练通关。↔短い"
+    },
+    {
+      "id": "mijikai",
+      "type": "word",
+      "jp": "短い",
+      "kana": "みじかい",
+      "gloss": "短（い形）",
+      "example": "短い手紙。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 2,
+      "scenes": [
+        "N5覆盖·形容词"
+      ],
+      "connections": [
+        "nagai"
+      ],
+      "mastery": 3,
+      "due": "2026-07-10",
+      "notes": "形容词反复练通关。读法みじかい确认"
+    },
+    {
+      "id": "ooi",
+      "type": "word",
+      "jp": "多い",
+      "kana": "おおい",
+      "gloss": "多（い形）",
+      "example": "人が多い。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 2,
+      "scenes": [
+        "N5覆盖·形容词"
+      ],
+      "connections": [
+        "sukunai"
+      ],
+      "mastery": 3,
+      "due": "2026-07-10",
+      "notes": "形容词反复练通关。↔少ない"
+    },
+    {
+      "id": "sukunai",
+      "type": "word",
+      "jp": "少ない",
+      "kana": "すくない",
+      "gloss": "少（い形）",
+      "example": "雨が少ない。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 1,
+      "scenes": [
+        "N5覆盖·形容词"
+      ],
+      "connections": [
+        "ooi",
+        "sukoshi"
+      ],
+      "mastery": 1,
+      "due": "2026-07-04",
+      "notes": "★≠少し(すこし副词'稍微')!少ない=形容词'少的'(人が少ない)。曾混用 |07-03复验遗忘,降m1短周期重练 ★第3次误少し,少ない=形容词"
+    },
+    {
+      "id": "osoi",
+      "type": "word",
+      "jp": "遅い",
+      "kana": "おそい",
+      "gloss": "慢/晚（い形）",
+      "example": "遅い時間。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 2,
+      "scenes": [
+        "N5覆盖·形容词"
+      ],
+      "connections": [
+        "hayai"
+      ],
+      "mastery": 3,
+      "due": "2026-07-10",
+      "notes": "慢也=晚。↔速い(快)。读法おそい确认"
+    },
+    {
+      "id": "semai",
+      "type": "word",
+      "jp": "狭い",
+      "kana": "せまい",
+      "gloss": "窄（い形）",
+      "example": "狭い道。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 2,
+      "scenes": [
+        "N5覆盖·形容词"
+      ],
+      "connections": [
+        "hiroi"
+      ],
+      "mastery": 3,
+      "due": "2026-07-10",
+      "notes": "↔広い。读法せまい确认"
+    },
+    {
+      "id": "akarui",
+      "type": "word",
+      "jp": "明るい",
+      "kana": "あかるい",
+      "gloss": "明亮（い形）",
+      "example": "明るい部屋。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 2,
+      "scenes": [
+        "N5覆盖·形容词"
+      ],
+      "connections": [
+        "kurai"
+      ],
+      "mastery": 3,
+      "due": "2026-07-10",
+      "notes": "↔暗い"
+    },
+    {
+      "id": "kurai",
+      "type": "word",
+      "jp": "暗い",
+      "kana": "くらい",
+      "gloss": "暗（い形）",
+      "example": "暗い道。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 2,
+      "scenes": [
+        "N5覆盖·形容词"
+      ],
+      "connections": [
+        "akarui"
+      ],
+      "mastery": 3,
+      "due": "2026-07-10",
+      "notes": "↔明るい。同音くらい=程度助词(これくらい)靠语境分"
+    },
+    {
+      "id": "futoi",
+      "type": "word",
+      "jp": "太い",
+      "kana": "ふとい",
+      "gloss": "粗（い形）",
+      "example": "太い線。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 1,
+      "scenes": [
+        "N5覆盖·形容词"
+      ],
+      "connections": [
+        "hosoi"
+      ],
+      "mastery": 1,
+      "due": "2026-07-04",
+      "notes": "↔細い |07-03复验遗忘,降m1短周期重练"
+    },
+    {
+      "id": "hosoi",
+      "type": "word",
+      "jp": "細い",
+      "kana": "ほそい",
+      "gloss": "细（い形）",
+      "example": "細い道。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 2,
+      "scenes": [
+        "N5覆盖·形容词"
+      ],
+      "connections": [
+        "futoi"
+      ],
+      "mastery": 3,
+      "due": "2026-07-10",
+      "notes": "↔太い"
+    },
+    {
+      "id": "omoi",
+      "type": "word",
+      "jp": "重い",
+      "kana": "おもい",
+      "gloss": "重（い形）",
+      "example": "重い鞄。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 1,
+      "scenes": [
+        "N5覆盖·形容词"
+      ],
+      "connections": [
+        "karui"
+      ],
+      "mastery": 1,
+      "due": "2026-07-04",
+      "notes": "↔軽い |07-03复验遗忘,降m1短周期重练"
+    },
+    {
+      "id": "tsuyoi",
+      "type": "word",
+      "jp": "強い",
+      "kana": "つよい",
+      "gloss": "强（い形）",
+      "example": "強い風。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 1,
+      "scenes": [
+        "N5覆盖·形容词"
+      ],
+      "connections": [
+        "yowai"
+      ],
+      "mastery": 1,
+      "due": "2026-07-04",
+      "notes": "↔弱い |07-03复验遗忘,降m1短周期重练"
+    },
+    {
+      "id": "yasashii-easy",
+      "type": "word",
+      "jp": "易しい",
+      "kana": "やさしい",
+      "gloss": "容易（い形）",
+      "example": "易しい問題。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 1,
+      "scenes": [
+        "N5覆盖·形容词"
+      ],
+      "connections": [
+        "muzukashii",
+        "yasashii-kind"
+      ],
+      "mastery": 1,
+      "due": "2026-07-04",
+      "notes": "★同音不同字:易しい(容易)/優しい(やさしい温柔)。曾混。↔難しい |07-03复验遗忘,降m1短周期重练 ★第2次误優しい(温柔),同音不同字"
+    },
+    {
+      "id": "atsui-hot",
+      "type": "word",
+      "jp": "熱い",
+      "kana": "あつい",
+      "gloss": "烫（物体；い形）",
+      "example": "お茶が熱い。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 1,
+      "scenes": [
+        "N5覆盖·形容词"
+      ],
+      "connections": [
+        "atsui-weather",
+        "atsui-thick",
+        "tsumetai"
+      ],
+      "mastery": 1,
+      "due": "2026-07-04",
+      "notes": "★三あつい:暑い(天热)/熱い(物烫,茶/湯)/厚い(厚)。熱い↔冷たい |07-03复验遗忘,降m1短周期重练"
+    },
+    {
+      "id": "suzushii",
+      "type": "word",
+      "jp": "涼しい",
+      "kana": "すずしい",
+      "gloss": "凉爽（天气舒服；い形）",
+      "example": "風が涼しい。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 2,
+      "scenes": [
+        "N5覆盖·形容词"
+      ],
+      "connections": [
+        "tsumetai",
+        "atatakai"
+      ],
+      "mastery": 3,
+      "due": "2026-07-10",
+      "notes": "★涼しい(天气凉爽,舒服)vs冷たい(触感冰)。↔暖かい"
+    },
+    {
+      "id": "karai",
+      "type": "word",
+      "jp": "辛い",
+      "kana": "からい",
+      "gloss": "辣（い形）",
+      "example": "辛いカレー。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 2,
+      "scenes": [
+        "N5覆盖·形容词"
+      ],
+      "connections": [
+        "amai",
+        "nigai"
+      ],
+      "mastery": 3,
+      "due": "2026-07-10",
+      "notes": "★同字异读:辛い=からい(辣)/つらい(辛苦难受),看语境"
+    },
+    {
+      "id": "nigai",
+      "type": "word",
+      "jp": "苦い",
+      "kana": "にがい",
+      "gloss": "苦（い形）",
+      "example": "コーヒーが苦い。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 2,
+      "scenes": [
+        "N5覆盖·形容词"
+      ],
+      "connections": [
+        "amai",
+        "karai"
+      ],
+      "mastery": 3,
+      "due": "2026-07-10",
+      "notes": "味觉组"
+    },
+    {
+      "id": "suppai",
+      "type": "word",
+      "jp": "酸っぱい",
+      "kana": "すっぱい",
+      "gloss": "酸（い形）",
+      "example": "酸っぱいレモン。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 1,
+      "scenes": [
+        "N5覆盖·形容词"
+      ],
+      "connections": [
+        "amai"
+      ],
+      "mastery": 1,
+      "due": "2026-07-04",
+      "notes": "★半浊音ぱ(すっぱい),曾误写すっばい(ば)。味觉组 |07-03复验遗忘,降m1短周期重练"
+    },
+    {
+      "id": "mazui",
+      "type": "word",
+      "jp": "不味い",
+      "kana": "まずい",
+      "gloss": "难吃（い形）",
+      "example": "まずいパン。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 1,
+      "scenes": [
+        "N5覆盖·形容词"
+      ],
+      "connections": [
+        "oishii"
+      ],
+      "mastery": 1,
+      "due": "2026-07-04",
+      "notes": "↔美味しい(おいしい)。常写假名まずい |07-03复验遗忘,降m1短周期重练"
+    },
+    {
+      "id": "itai",
+      "type": "word",
+      "jp": "痛い",
+      "kana": "いたい",
+      "gloss": "痛（い形）",
+      "example": "頭が痛い。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 1,
+      "scenes": [
+        "N5覆盖·形容词"
+      ],
+      "connections": [],
+      "mastery": 1,
+      "due": "2026-07-04",
+      "notes": "身体不适常用:頭/お腹が痛い |07-03复验遗忘,降m1短周期重练"
+    },
+    {
+      "id": "sabishii",
+      "type": "word",
+      "jp": "寂しい",
+      "kana": "さびしい",
+      "gloss": "寂寞（い形）",
+      "example": "一人で寂しい。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 1,
+      "scenes": [
+        "N5覆盖·形容词"
+      ],
+      "connections": [
+        "ureshii"
+      ],
+      "mastery": 1,
+      "due": "2026-07-04",
+      "notes": "情绪组 |07-03复验遗忘,降m1短周期重练"
+    },
+    {
+      "id": "wakai",
+      "type": "word",
+      "jp": "若い",
+      "kana": "わかい",
+      "gloss": "年轻（い形）",
+      "example": "若い人。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 1,
+      "scenes": [
+        "N5覆盖·形容词"
+      ],
+      "connections": [],
+      "mastery": 1,
+      "due": "2026-07-04",
+      "notes": " |07-03复验遗忘,降m1短周期重练"
+    },
+    {
+      "id": "kashikoi",
+      "type": "word",
+      "jp": "賢い",
+      "kana": "かしこい",
+      "gloss": "聪明（い形）",
+      "example": "賢い子。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 1,
+      "scenes": [
+        "N5覆盖·形容词"
+      ],
+      "connections": [],
+      "mastery": 1,
+      "due": "2026-07-04",
+      "notes": " |07-03复验遗忘,降m1短周期重练"
+    },
+    {
+      "id": "kitanai",
+      "type": "word",
+      "jp": "汚い",
+      "kana": "きたない",
+      "gloss": "脏（い形）",
+      "example": "汚い手。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 1,
+      "scenes": [
+        "N5覆盖·形容词"
+      ],
+      "connections": [],
+      "mastery": 1,
+      "due": "2026-07-04",
+      "notes": " |07-03复验遗忘,降m1短周期重练"
+    },
+    {
+      "id": "kowai",
+      "type": "word",
+      "jp": "怖い",
+      "kana": "こわい",
+      "gloss": "害怕/可怕（い形）",
+      "example": "犬が怖い。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 1,
+      "scenes": [
+        "N5覆盖·形容词"
+      ],
+      "connections": [],
+      "mastery": 1,
+      "due": "2026-07-04",
+      "notes": " |07-03复验遗忘,降m1短周期重练"
+    },
+    {
+      "id": "chairoi",
+      "type": "word",
+      "jp": "茶色い",
+      "kana": "ちゃいろい",
+      "gloss": "棕色（い形）",
+      "example": "茶色い髪。",
+      "first_seen": "2026-06-29",
+      "last_seen": "2026-07-03",
+      "exposures": 3,
+      "active_output": 1,
+      "scenes": [
+        "N5覆盖·形容词"
+      ],
+      "connections": [],
+      "mastery": 1,
+      "due": "2026-07-04",
+      "notes": "★形容词带い:茶色い(ちゃいろい);茶色(ちゃいろ)是名词。曾漏い |07-03复验遗忘,降m1短周期重练"
+    },
+    {
+      "id": "houga",
+      "type": "grammar",
+      "jp": "〜のほうが",
+      "kana": "",
+      "gloss": "（比较）…更…（AのほうがB；A是更B的一方）",
+      "example": "自炊のほうが安い。",
+      "first_seen": "2026-06-30",
+      "last_seen": "2026-06-30",
+      "exposures": 1,
+      "active_output": 1,
+      "scenes": [
+        "外食自炊"
+      ],
+      "connections": [
+        "to-omou"
+      ],
+      "mastery": 2,
+      "due": "2026-07-03",
+      "notes": "N5比较。★のほうが贴比较主体(自炊のほうが安い),不贴形容词(曾误'安いのほうが')。常配 より(AよりBのほうが)"
+    },
+    {
+      "id": "tara",
+      "type": "grammar",
+      "jp": "〜たら",
+      "kana": "",
+      "gloss": "如果…的话/…之后（条件，N3 9.4；接续=た形+ら，动词/い形/名词通用）",
+      "example": "お金が貯まったら、家を買いたい。/ 安かったら、買います。",
+      "first_seen": "2026-06-30",
+      "last_seen": "2026-06-30",
+      "exposures": 1,
+      "active_output": 1,
+      "scenes": [
+        "攒钱买房"
+      ],
+      "connections": [
+        "tari",
+        "kanoukei",
+        "kaeru"
+      ],
+      "mastery": 2,
+      "due": "2026-07-03",
+      "notes": "★N3 9.4双轨点火首个条件句。接续=た形+ら(買った→買ったら/安かった→安かったら)。钩子:た形+り=たり(列举)、た形+ら=たら(条件),同源。首introduce動詞たら+い形たら均一次用对。最万能条件句(假设+时间'…之后')"
+    },
+    {
+      "id": "nara",
+      "type": "grammar",
+      "jp": "〜なら",
+      "kana": "",
+      "gloss": "（既然/如果是）…的话（条件·前提，N3 9.4；接普通形/名词，不变た形；接住前提给建议判断）",
+      "example": "あなたなら、家を買いますか。/ 日本語を勉強したいなら、毎日話すのが一番いいです。",
+      "first_seen": "2026-06-30",
+      "last_seen": "2026-06-30",
+      "exposures": 1,
+      "active_output": 1,
+      "scenes": [
+        "买房/学习建议"
+      ],
+      "connections": [
+        "tara",
+        "nominalize"
+      ],
+      "mastery": 2,
+      "due": "2026-07-03",
+      "notes": "★N3 9.4。与たら对比(最易混):たら=发生/完成之后(要た形),なら=接住前提给建议(直接接,不变形)。用户曾误'勉強したいたら'(应なら,なら不变形)。经典:着いたら連絡(之后)/行くならこれ買って(前提建议)"
+    },
+    {
+      "id": "soretomo",
+      "type": "word",
+      "jp": "それとも",
+      "kana": "",
+      "gloss": "还是/或者（二选一疑问间，AですかそれともBですか）",
+      "example": "家を買いますか、それとも国に帰りますか。",
+      "first_seen": "2026-06-30",
+      "last_seen": "2026-06-30",
+      "exposures": 1,
+      "active_output": 1,
+      "scenes": [
+        "买房/学习建议"
+      ],
+      "connections": [],
+      "mastery": 2,
+      "due": "2026-07-03",
+      "notes": "用户曾用中文'还是'卡住。それとも=两个疑问句之间的'或者'。与や(名词列举)、または(或)区分"
+    },
+    {
+      "id": "ba",
+      "type": "grammar",
+      "jp": "〜ば",
+      "kana": "",
+      "gloss": "如果…就…（一般/假设条件，N3 9.4/9.13；動詞う段→え段+ば、い形い→ければ；招牌:ば〜ほど越…越…）",
+      "example": "お金があれば、家を買いたい。/ 練習すればするほど、上手になる。",
+      "first_seen": "2026-07-01",
+      "last_seen": "2026-07-01",
+      "exposures": 1,
+      "active_output": 1,
+      "scenes": [
+        "条件句家族"
+      ],
+      "connections": [
+        "tara",
+        "nara",
+        "kanoukei"
+      ],
+      "mastery": 2,
+      "due": "2026-07-04",
+      "notes": "★条件句家族第4个(と/ば/たら/なら凑齐)。ば偏一般/逻辑条件+ば〜ほど。用户'お金があれば'+ば〜ほど一次对,仅上手になる误なります(なる→なります,非ないます)"
+    }
   ]
 }

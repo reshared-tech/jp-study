@@ -209,11 +209,21 @@ def write_data(days):
     print(f"写入 web/data.js：{len(days)} 天，{total_s} 句例句。")
 
 
+def write_ledger_js():
+    """顺带把 ledger.json 导出成 web/ledger.js，供 vocab.html 读 SRS 状态。"""
+    try:
+        import build_ledger_js
+        build_ledger_js.main()
+    except Exception as e:
+        print("（跳过 ledger.js 生成：", e, "）")
+
+
 def main():
     days = collect()
     asyncio.run(gen_audio(days))
     write_data(days)
-    print("完成。打开 web/index.html 即可。")
+    write_ledger_js()
+    print("完成。打开 web/index.html（日志/抽认）或 web/vocab.html（背单词）即可。")
 
 
 if __name__ == "__main__":

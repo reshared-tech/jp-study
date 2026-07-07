@@ -1,2 +1,4 @@
 .DS_Store
 tools/.voice_session.json
+ledger.json.*.bak
+vocab-progress-*.json
